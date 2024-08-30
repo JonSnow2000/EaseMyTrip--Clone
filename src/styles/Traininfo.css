@@ -1,0 +1,14 @@
+@media(max-width:768px){
+    .traininfo-main{
+        overflow-x: scroll;
+    }
+    .traininfo-main>div{
+        width: 130vw;
+    }
+    .train-list{
+        width: 130vw;
+    }
+    .coach{
+        overflow-x: scroll;
+    }
+}

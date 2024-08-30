@@ -1,0 +1,56 @@
+﻿////function GetUserIP() {
+////    CustomerId = getCookie("CusId");
+////    UserIp = getCookie("UserIP");
+////    var ret_ip;
+////    if (UserIp == null || UserIp == '') {
+////        $.getJSON("https://gi.easemytrip.com/UserIP.svc/GetIP",
+////            function (data) {
+////                // Setting text of element P with id gfg
+////                ret_ip = (data);
+////                UserIp = ret_ip;
+////                setCookie("UserIP", ret_ip, 25)
+////            })
+////    }
+////    else {
+////        ret_ip = UserIp;
+////    }
+////    return ret_ip;
+////}
+var UserIp='';
+var giEndpoint="https://gi.easemytrip.com";
+function GetUserIP() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', "https://gi.easemytrip.com/UserIP.svc/GetIP", false);
+    xhr.send(null);
+    if (xhr.status === 200) {
+		UserIp=xhr.responseText.split('>')[1].split('<')[0];
+        setCookie("UserIP", UserIp, 25);
+        return UserIp;
+    } else {
+        throw new Error('Request failed: ' + xhr.statusText);
+    }
+}
+function setCookie(cname, cvalue, exdays) {
+
+    var locationurl = window.location.host;
+    locationurl = locationurl.replace("www", "");
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/" + ";domain=" + locationurl;
+}
+ function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+GetUserIP();

@@ -1,0 +1,14 @@
+@media (max-width:768px){
+    .bus-list-main{
+        width: 98vw;
+        overflow-x: scroll;
+    }
+    .bus-list{
+        width: 180vw;
+        margin: 10px;
+    }
+    .bus-list-container{
+        width: 98vw;
+    }
+    
+}

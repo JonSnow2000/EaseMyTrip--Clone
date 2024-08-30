@@ -1,0 +1,92 @@
+@charset "utf-8";.footer{width:100%;background:#333333;float:left}
+.footer .footer_inr{width:1200px;margin:0 auto;padding:25px 15px;}
+.ftr_col_1{width:13%;float:left}
+.ftr_col_1 ul{margin:6% 0;padding:0;}
+.ftr_col_1 ul li{list-style:outside none none;margin:0;padding:0;text-decoration:none;line-height:19px;}
+.ftr_col_1 ul li a{color:#fff;font-size:12px;text-decoration:none;transition:all 0.8s ease 0s;}
+.ftr_col_1 ul li a:hover{text-decoration:underline;padding-left:5px}
+.ftr_ttl{text-transform:uppercase;font-weight:bold;font-size:12px;color:#fff;letter-spacing:.5px}
+.ftr_col_1:last-child{border-right:1px solid #505050}
+.ftr_col_2{width:30%;float:left;border-left:1px solid #505050;border-right:1px solid #505050}
+.ftr_col_3{width:15%;float:left;padding-left:2%;}
+.ftr_col_inr{width:88%;margin:0 auto}
+.cards{width:100%;margin:20px 0 40px 0;float:left}
+.visa,.master,.american{background-image:url(https://www.easemytrip.com/images/common/ns-sprite.png); height:37px;width:57px;margin-right:10px; display: inline-block;}
+.py_pal{background-image:url(https://www.easemytrip.com/images/common/ns-sprite.png);
+height:37px;width:84px;background-position:-315px -83px; display: inline-block; margin-right: 10px;}
+.visa{background-position:-1px -35px}
+.master{background-position:-69px -35px}
+.american{background-position:-138px -35px}
+.social{width:100%;float:left;margin:20px 0}
+.fb_b,.tw_b,.gp_b,.yt_b,.li_b,.in_b,.tl_b{width:36px;height:36px;vertical-align:middle;background:#333;border:1px solid #fff;border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;float:left;margin-right:10px;cursor:pointer;transition:all 0.5s ease 0s;}
+.fb_n{width:21px;height:21px;background:url(https://www.easemytrip.com/images/common/ns-sprite.png) -9px -88px;display:block;margin:7px auto;}
+.tw_n{width:21px;height:21px;background:url(https://www.easemytrip.com/images/common/ns-sprite.png) -49px -88px;display:block;margin:7px auto;}
+.gp_n{width:21px;height:21px;background:url(https://www.easemytrip.com/images/common/ns-sprite.png) -88px -88px;display:block;margin:7px auto;}
+.yt_n{width:23px;height:21px;background:url(https://www.easemytrip.com/images/common/ns-sprite.png) -125px -88px;display:block;margin:7px auto;}
+.li_n{width:22px;height:21px;background:url(https://www.easemytrip.com/images/common/ns-sprite.png) -166px -87px;display:block;margin:7px auto;}
+.in_n{width:21px;height:21px;background:url(https://www.easemytrip.com/images/common/ns-sprite.png) -205px -88px;display:block;margin:7px auto;}
+.tl_n{width:24px;height:20px;background:url(https://www.easemytrip.com/images/common/telegram-icon.png) 0 0;display:block;margin:7px auto;}
+.fb_b:hover{background:#3B5998}
+.tw_b:hover{background:#55ACEE}
+.gp_b:hover{background:#dd4b39}
+.yt_b:hover{background:#bb0000}
+.li_b:hover{background:#007bb5}
+.in_b:hover{background:#125688}
+.tl_b:hover{background:#24a1de}
+.ap_d_cn{font-size:16px;font-weight:bold;color:#fff;letter-spacing:.5px;}
+.ap_d_cn span{display:block;font-size:12px;}
+.pl_store{width:114px;height:39px;background:url(https://www.easemytrip.com/images/common/ns-sprite.png) -286px 0px;float:left;margin:15px 0;}
+.app_store{width:114px;height:39px;background:url(https://www.easemytrip.com/images/common/ns-sprite.png) -286px -41px;float:left}
+.brdr_1{width:100%;height:1px;background:#505050}
+.ftr_col_4{width:54%;float:left;font-size:12px;color:#fff;line-height:43px;}
+.ftr_col_5{width:46%;float:left;}
+.ftr_col_5 ul{display:inline-block;list-style:none;margin:0}
+.ftr_col_5 ul li{display:inline-block;list-style:none;margin:0;padding:0 4px}
+.bottom_brdr{width:100%}
+.dark_clr{background:#4263c1;width:24%;float:left;height:11px;}
+.light_clr{background:#468be8;width:76%;float:left;height:11px;}
+.fb_b:hover,.tw_b:hover,.gp_b:hover,.yt_b:hover,.li_b:hover,.in_b:hover,.tl_b:hover{-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+.pl_store:hover{}
+@-webkit-keyframes hvr-wobble-horizontal{16.65%{-webkit-transform:translateX(8px);transform:translateX(8px);}
+33.3%{-webkit-transform:translateX(-6px);transform:translateX(-6px);}
+49.95%{-webkit-transform:translateX(4px);transform:translateX(4px);}
+66.6%{-webkit-transform:translateX(-2px);transform:translateX(-2px);}
+83.25%{-webkit-transform:translateX(1px);transform:translateX(1px);}
+100%{-webkit-transform:translateX(0);transform:translateX(0);}
+}
+@keyframes hvr-wobble-horizontal{16.65%{-webkit-transform:translateX(8px);transform:translateX(8px);}
+33.3%{-webkit-transform:translateX(-6px);transform:translateX(-6px);}
+49.95%{-webkit-transform:translateX(4px);transform:translateX(4px);}
+66.6%{-webkit-transform:translateX(-2px);transform:translateX(-2px);}
+83.25%{-webkit-transform:translateX(1px);transform:translateX(1px);}
+100%{-webkit-transform:translateX(0);transform:translateX(0);}
+}
+.hvr-wobble-horizontal{display:inline-block;vertical-align:middle;-webkit-transform:perspective(1px) translateZ(0);transform:perspective(1px) translateZ(0);box-shadow:0 0 1px transparent;}
+.hvr-wobble-horizontal:hover, .hvr-wobble-horizontal:focus, .hvr-wobble-horizontal:active{-webkit-animation-name:hvr-wobble-horizontal;animation-name:hvr-wobble-horizontal;-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-iteration-count:1;animation-iteration-count:1;}
+.rupaylg {
+    background-image: url(https://www.easemytrip.com/images/common/rupay-lg-nw.png);
+  display: inline-block;
+    height: 35px;
+    width: 57px;
+    background-position: 0 0;
+    margin-top: 6px;
+}
+.pcilg {
+    background-image: url(https://www.easemytrip.com/images/common/pci-logo.png);
+     float: none !important; 
+    height: 35px;
+    width: 57px;
+    background-position: 0 0;
+    margin-top: 6px;
+    margin-left: 10px;
+    display: inline-block;
+}
+@media only screen and (min-width:150px) and (max-width:850px){.footer .footer_inr{width:100%;padding:10px}
+.ftr_col_1,.ftr_col_4{width:100%;}
+.ftr_col_1 ul{margin:1% 0}
+.ftr_col_2{width:100%;border-left:0;border-right:0;}
+.ftr_col_inr{width:100%;margin:0}
+.ftr_col_3{width:15%;padding:0}
+.ftr_col_1,.ftr_col_2,.ftr_col_3,.ftr_col_5,.brdr_1{display:none}
+.ftr_col_4{text-align:center;}
+}

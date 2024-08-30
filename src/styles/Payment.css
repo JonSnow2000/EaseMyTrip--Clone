@@ -1,0 +1,20 @@
+@media(max-width:768px){
+.payment-main-container{
+    width: 97vw;
+    padding: 0;
+}
+.payment-main-container>div{
+    padding: 5px;
+    width: inherit;
+}
+.paymentDetails>div{
+    width: 96vw;
+    padding: 5px;
+}
+.tab-sec>h1{
+margin: 8px;
+}
+.paymentDetails{
+    padding: 0;
+}
+}

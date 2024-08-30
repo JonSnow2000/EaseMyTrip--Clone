@@ -1,0 +1,43 @@
+@media (max-width: 768px) {
+    .topNav{
+        margin:8px;
+        width: auto;
+        justify-content: start;
+        
+    }
+    .moblogo{
+        margin-left: 50px;
+    }
+    .hide{
+        display: none;
+    }
+    .mobileMenu{
+        display: flex;
+        flex-direction: column;
+        width: 98vw;
+    }
+    .mobileMenu div{
+        border-bottom: 1px solid gray;
+    }
+    .mob-login-option{
+        position: absolute;
+        left: 5px;
+        background-color: white;
+    }
+    .mob-offer>div{
+        left: 5px;
+        width: 98vw;
+    }
+    .mob-menu{
+        display: block;
+    }
+}
+
+@media (max-width: 1024px) {
+    .topNav{
+        width: 95vw;
+    }
+ .hide{
+    width: 95vw;
+ }
+}

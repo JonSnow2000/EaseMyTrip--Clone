@@ -1,0 +1,32 @@
+@media(max-width:768px){
+    *::-webkit-scrollbar {
+        display: none;    
+    }
+    .train-blue{
+        padding: 10px;
+        overflow-x: scroll;
+    }
+    .train-blue>div{
+        width: 200vw;
+        text-wrap: nowrap;
+    }
+    .whyTrain{
+        padding: 10px;
+        z-index: -1;
+    }
+    .selectcity{
+        right: 0px;
+    }
+    .app-info{
+        width: 100vw;
+        overflow-y: scroll;
+    }
+    .app-info>div{
+        width: auto;
+        /* overflow-x: scroll; */
+    }
+    .trust{
+        margin-left: 28px;
+     }
+    
+}

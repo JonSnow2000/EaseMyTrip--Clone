@@ -1,0 +1,9 @@
+@media(max-width:768px){
+    .bus-bluediv{
+        padding: 10px;
+      overflow-x: scroll;
+    }
+    .bus-bluediv>div{
+        width: 150vw;
+    }
+}

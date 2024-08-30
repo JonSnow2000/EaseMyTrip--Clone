@@ -1,0 +1,19 @@
+@media (max-width:768px){
+    .train-booking-main{
+        flex-direction: column;
+        width: 97vw;
+        align-items: center;
+    }
+    .train-booking-main>div{
+        width: 97vw;
+    }
+    .irctc-id{
+        flex-direction: column;
+    }
+    .train-details{
+        overflow-x: scroll;
+    }
+    .train-time{
+        margin: 0px 25px;
+    }
+}

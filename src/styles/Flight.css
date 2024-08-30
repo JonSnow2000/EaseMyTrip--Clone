@@ -1,0 +1,48 @@
+@media (max-width:768px){
+    .hide{
+        display: none;
+    }
+    .main-container{
+        margin-left: 0px;
+        overflow-x: scroll;
+    }
+    .flight-list-container{
+        width: 185vw;
+        padding: 10px;
+    }
+    .flight-list{
+        width: 185vw;
+        padding: 0;
+    }
+    .meal{
+        width: 35vw;
+    }
+    .pl-6{
+        padding-left: 35px;
+    }
+    .duration-div{
+        gap: 10px;
+        padding: 10px;
+        justify-content: start;
+    }
+    .price{
+        margin-left: 20px;
+    }
+    .btn{
+        text-wrap: nowrap;
+    }
+    /* .flight-div{
+    } */
+}
+
+@media (max-width:1024px){
+    .main-container{
+        margin: 10px;
+    }
+    .flno{
+        width: 80px;
+    }
+    .sort-section{
+        width: 15vw;
+    }
+}

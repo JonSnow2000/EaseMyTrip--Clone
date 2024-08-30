@@ -1,0 +1,121 @@
+$(document).ready(function(){
+  $("#shwbestofr").click(function(){
+    $("#bestoffers").show();
+	$("#flightoffers").hide();
+	$("#hoteloffers").hide();
+	$("#busoffers").hide();
+	$("#holidayoffers").hide();
+	$("#shwbestofr").addClass('activetb');
+	$("#shwholidayofr").removeClass('activetb');
+	$("#shwflofr").removeClass('activetb');
+	$("#shwhtlofr").removeClass('activetb');
+	$("#shwbusofr").removeClass('activetb');
+  });
+  $("#shwflofr").click(function(){
+    $("#flightoffers").show();
+	$("#bestoffers").hide();
+	$("#hoteloffers").hide();
+	$("#busoffers").hide();
+	$("#holidayoffers").hide();
+	$("#shwflofr").addClass('activetb');
+	$("#shwholidayofr").removeClass('activetb');
+	$("#shwbestofr").removeClass('activetb');
+	$("#shwhtlofr").removeClass('activetb');
+	$("#shwbusofr").removeClass('activetb');
+  });
+  $("#shwhtlofr").click(function(){
+    $("#hoteloffers").show();
+	$("#bestoffers").hide();
+	$("#flightoffers").hide();
+	$("#busoffers").hide();
+	$("#holidayoffers").hide();
+	$("#shwhtlofr").addClass('activetb');
+	$("#shwholidayofr").removeClass('activetb');
+	$("#shwbestofr").removeClass('activetb');
+	$("#shwflofr").removeClass('activetb');
+	$("#shwbusofr").removeClass('activetb');
+  });
+  $("#shwbusofr").click(function(){
+    $("#busoffers").show();
+	$("#bestoffers").hide();
+	$("#flightoffers").hide();
+	$("#hoteloffers").hide();
+	$("#holidayoffers").hide();
+	$("#shwbusofr").addClass('activetb');
+	$("#shwholidayofr").removeClass('activetb');
+	$("#shwbestofr").removeClass('activetb');
+	$("#shwflofr").removeClass('activetb');
+	$("#shwhtlofr").removeClass('activetb');
+  });
+  $("#shwholidayofr").click(function(){
+    $("#holidayoffers").show();
+	$("#busoffers").hide();
+	$("#bestoffers").hide();
+	$("#flightoffers").hide();
+	$("#hoteloffers").hide();
+	$("#shwholidayofr").addClass('activetb');
+	$("#shwbusofr").removeClass('activetb');
+	$("#shwbestofr").removeClass('activetb');
+	$("#shwflofr").removeClass('activetb');
+	$("#shwhtlofr").removeClass('activetb');
+  });
+});
+
+//slider
+$(document).ready(function(){
+var Swipes = new Swiper('.swiper-container', {
+  slidesPerView: 4,
+  centeredSlides: true,
+  observer: true,
+  observeParents: true,
+  parallax:true,
+  paginationClickable: true,
+    spaceBetween: 10,
+  slideToClickedSlide: 0,
+  loop: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    //pagination: {
+   //     el: '.swiper-pagination',
+  //  },
+});
+});
+
+
+function copyToClip(element,$this) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+  
+  if (typeof showNotification === 'undefined') {
+                showNotification = true;
+            }
+            if (typeof notificationText === 'undefined') {
+                notificationText = "Promocode Copied";
+            }
+
+            if (showNotification) {
+
+
+var node=document.createElement("Div"); node.innerHTML = notificationText; 
+node.style.cssText="color: #ffffff;background-color: rgba(0,0,0,0.8);padding: 6px 10px;border-radius: 30px;position: absolute; bottom: 6px;left: 128px;width: 120px;text-align: center;font-size: 11px;margin-top: -17px;z-index:9";
+	$this.parentElement.parentElement.append(node);
+	node.setAttribute("id", "dval");
+	
+	 setTimeout(function () {
+                      node.style.display="none";
+					  node.remove();
+                    }, 1000);
+	
+  
+            }  
+}
+
+
+function stopredir(e) {
+   e.preventDefault();
+}

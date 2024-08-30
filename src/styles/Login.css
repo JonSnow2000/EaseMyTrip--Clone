@@ -1,0 +1,18 @@
+@media (max-width:768px){
+    .mainDiv{
+        display: block;
+        margin-left: 8px;
+        width: 97vw;
+        padding: 10px;
+    }
+    .image-slider, .login-section{
+        width: 90vw;
+    }
+    .image-slider{
+        margin-left: 3px;
+    }
+    .login-section{
+        padding: 0;
+        margin: 5px;
+    }
+}

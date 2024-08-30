@@ -1,0 +1,418 @@
+* {
+    box-sizing: border-box;
+}
+
+.pd20_main {
+    background: #E8F2FA;
+    padding: 5px 15px;
+    display: block;
+    width: 100%;
+    float: left;
+    height: 83vh;
+    overflow: auto;
+}
+.m_sugg_bx {
+    background: #fff;
+    float: left;
+    box-shadow: 0 0 7px rgb(0 0 0 / 5%);
+    border-radius: 5px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.m_sugg_bx  .mglo{margin-left: 0;}
+.txt_bx{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+.pd15 {
+    padding: 12px 5px;
+}
+.f12{font-size: 14px;}
+.mgauto_lft{margin-left:auto;}
+.flx-clm{flex-direction: column;}
+.rec_txt{
+	font-size: 14px;
+    color: #7D7D7D;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.rec_txt a {
+cursor:pointer
+}
+.bdr_lg_sugg {
+    border-top: 1px solid #DCDCDC;
+    padding-top: 12px;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+}
+img{max-width: 100%;}
+.pop_city_bx {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.pop_city_bx a {
+    color: #2196f3;
+    font-size: 12px;
+    padding: 6px 10px;
+    border: 1px solid #2196f3;
+    border-radius: 5px;
+    margin: 0px 5px 8px 0px;
+    text-decoration: none;
+}
+.pop_city_bx a:hover {background:#2196f3;color:#fff}
+
+.sugg_cross {
+    position: absolute;
+    right: 15px;
+    top: 18px;
+    width: 13px;
+    height: 13px;
+}
+.gps-icon-img{
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    background-size: 100%;
+}
+
+
+
+
+
+
+        /*autolist*/
+
+
+.w_85 {
+    width: auto;
+    float: left;
+    min-width: 86%;
+    margin-left: auto;
+}
+.w_10 {
+    width: auto;
+    min-width: 15%;
+    float: left;
+    display: flex;
+    align-items: center;
+	margin-right:5px;
+    flex-direction: column;
+}
+.cab .w_10 {
+    width: auto;
+    min-width: auto;
+    float: left;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.auto-sugg-pre {
+    width: 100%;
+    position: relative;
+    background: #fff;
+}
+.auto-sugg-pre ul {
+    list-style-type: none;
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin: auto;
+    background: #fff;
+    position: relative;
+}
+.auto-sugg-pre ul li {
+    border-bottom: 1px solid #DCDCDC;
+    float: left;
+    width: 100%;
+    padding: 13px 0px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+.auto-sugg-pre ul li:last-child {
+    border-bottom: 0;
+    padding-bottom: 5px;
+}
+.auto_sugg {
+    width: 100%;
+    position: relative;
+}
+
+.auto_sugg ul {
+    list-style-type: none;
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin: auto;
+    position: relative;
+}
+.auto_sugg ul li {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    background: #fff;
+    margin: 2px auto;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+                    
+
+.auto_sugg_tttl {
+    color: #000000;
+    font-weight: 400;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.auto_sugg_add {
+    font-size: 11px;
+    margin-top: 2px;
+    color: #7D7D7D;
+    text-transform: capitalize;
+}
+.w_10  .f11{font-size: 11px !important; }
+.auto_sugg_img {
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    background-size: 100%;
+}
+
+        #dvinpsrce {
+            width: 100%;
+            float: left;
+            font-size: 14px;
+        }
+.auto_sugg_star{		
+	display: flex;
+    align-items: center;
+}	
+.sugg_star {
+    width: 8px;
+    height: 8px;
+    background-image: url(https://www.easemytrip.com/images/cab-img/sugg_star.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.sugg_loc {
+    background-image: url(https://www.easemytrip.com/images/cab-img/location-ausugg.svg?v=2);
+}
+.sugg_city {
+    background-image: url(https://www.easemytrip.com/images/cab-img/location-ausugg.svg?v=2);
+}
+
+.sugg_airport {
+    background-image: url(https://www.easemytrip.com/images/cab-img/flight-ausugg.svg?v=2);
+}
+
+.sugg_hotel {
+    background-image: url(https://www.easemytrip.com/images/cab-img/hotel-ausugg.svg?v=2);
+}
+
+.sugg_bus {
+    background-image: url(https://www.easemytrip.com/images/cab-img/bus-ausugg.svg?v=2);
+}
+
+.sugg_train {
+    background-image: url(https://www.easemytrip.com/images/cab-img/train-ausugg.svg?v=2);
+}
+
+.sugg_port {
+    background-image: url(https://www.easemytrip.com/images/cab-img/ship-ausugg.svg?v=2);
+}
+
+.sugg_resort {
+    background-image: url(https://www.easemytrip.com/images/cab-img/resort-ausugg.svg?v=2);
+}
+.sugg_default {
+    background-image: url(https://www.easemytrip.com/images/cab-img/star-ausugg.svg?v=2);
+}
+.sugg_attrctn {
+    background-image: url(https://www.easemytrip.com/images/cab-img/attrctn-ausugg.svg?v=2);
+}
+.sugg_region {
+    background-image: url(https://www.easemytrip.com/images/cab-img/region-ausugg.svg?v=2);
+}
+.sugg_shop {
+    background-image: url(https://www.easemytrip.com/images/cab-img/shop-ausugg.svg?v=2);
+}
+.sugg_place {
+    background-image: url(https://www.easemytrip.com/images/cab-img/location-ausugg.svg?v=2);
+}
+.sugg_school {
+    background-image: url(https://www.easemytrip.com/images/cab-img/school-ausugg.svg?v=2);
+}
+/*autolist*/
+
+
+.desktop_autosugg {
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    top: 100px;
+    overflow: auto;
+    max-height: 360px;
+    float: left;
+    z-index: 9999;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+}
+
+.desktop_autosugg::-webkit-scrollbar, .auto_sugg_hotel::-webkit-scrollbar {
+  width: 8px;
+}
+.desktop_autosugg::-webkit-scrollbar-track, .auto_sugg_hotel::-webkit-scrollbar-track {
+  background: #ddd; 
+
+}
+.desktop_autosugg::-webkit-scrollbar-thumb, .auto_sugg_hotel::-webkit-scrollbar-thumb {
+  background: #848484 ; 
+}
+
+.desk_sugg_bx {
+    float: left;
+    border-radius: 5px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
+
+.desktop_autosugg .auto-sugg-pre ul li, .desktop_autosugg .auto_sugg ul li{
+    border-bottom: 0;
+    margin: auto;
+    background: #fff;
+    float: left;
+    box-shadow: 0 0 7px rgb(0 0 0 / 5%);
+    border-radius: 5px;
+    padding: 8px 10px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+	cursor:pointer
+}
+.desktop_autosugg .auto_sugg ul li:first-child{margin-top: 0px;}
+.desktop_autosugg  .auto_sugg_add {
+    font-size: 12px;
+    margin-top: 0px;
+    color: #7D7D7D;
+    text-transform: capitalize;
+}
+.desktop_autosugg  .pd15 {
+    padding: 8px 5px;
+}
+.desktop_autosugg  .auto_sugg_add {
+    font-size: 12px;
+    margin-top: 0px;
+    color: #7D7D7D;
+    text-transform: capitalize;
+}
+.desktop_autosugg .pop_city_bx {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+.desktop_autosugg .marbtm0 {
+    margin-bottom: 0;
+    padding: 0 5px;
+}
+
+.ui-menu .ui-menu-item-wrapper {
+    position: relative;
+    padding: 0 !important;
+}
+.auto_sugg_hotel {
+    list-style-type: none;
+    float: left;
+    width: 382px !important;
+    padding: 10px !important;
+    margin: auto !important;
+    position: relative;
+	box-shadow: 0px 0px 8px 0px rgba(0,0,0,.30)!important;
+	-webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,.30)!important;
+}
+.auto_sugg_hotel li:first-child {
+    margin-top: 0px  !important;
+}
+
+.auto_sugg_hotel li {
+    border-bottom: 0;
+    margin: auto;
+    background: #fff;
+    float: left;
+    box-shadow: 0 0 7px rgb(0 0 0 / 6%);
+    border-radius: 5px;
+    padding: 8px 10px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 8px !important;
+	border: 1px solid #f7f0f0;
+}
+
+.auto_sugg_hotel .auto_sugg_add {
+    font-size: 12px;
+    margin-top: 0px;
+    color: #7D7D7D;
+    text-transform: capitalize;
+}
+
+#ui-id-1 .ui-state-active {
+    background: transparent !important;
+}
+.auto_sugg_hotel li:hover,.desktop_autosugg .auto-sugg-pre ul li:hover {
+    background: #f0f5fc;
+    box-shadow: none;
+	border-color:#ccdef7;
+}
+.back_btn{				
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    width: 13px;
+    height: 13px;
+}
+.input_New_auto{
+    font-size: 17px;
+    padding: 15px 8px 15px 40px;
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 4px;
+}
+#stickyheaderCal {
+    width: 100%;
+    height: 80px !important;
+    position: fixed !important;
+    top: 0;
+}

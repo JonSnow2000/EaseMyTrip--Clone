@@ -1,0 +1,63 @@
+/* Pagination.css */
+.pagination {
+    margin : 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    border-radius: 8px;
+}
+
+.pagination a, .pagination span {
+    display: block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    /* color: #007bff; Bootstrap primary color */
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.pagination a {
+    color: #007bff; /* Color for normal links */
+    border: 1px solid #007bff; /* Border for normal links */
+}
+
+.pagination a:hover {
+    background-color: #e9ecef; /* Hover background */
+}
+
+.pagination .active a {
+    background-color: #007bff; /* Active page background */
+    color: #fff; /* Active page text color */
+    border-color: #007bff; /* Active page border color */
+}
+
+.pagination .disabled a {
+    color: #6c757d; /* Disabled page color */
+    border-color: #6c757d; /* Disabled page border color */
+    cursor: not-allowed;
+}
+
+.pagination .break {
+    cursor: default;
+    color: #6c757d; /* Color for ellipsis */
+    padding: 8px 12px;
+    margin: 0 4px;
+}
+
+.pagination .previous,
+.pagination .next {
+    color: #fff; /* Text color for navigation buttons */
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.pagination .previous:hover,
+.pagination .next:hover {
+    border-color: #0056b3; /* Darker border color on hover */
+}

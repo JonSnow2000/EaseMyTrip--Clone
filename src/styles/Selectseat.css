@@ -1,0 +1,14 @@
+@media(max-width:768px){
+    
+    .select-seat-main-container{ 
+        flex-direction: column; 
+        width: 100vw;
+        position: static; 
+        overflow-x: scroll;
+        padding: 5px;
+    } 
+    .seat, .fare{
+        width: 100vw;
+    }
+    
+}

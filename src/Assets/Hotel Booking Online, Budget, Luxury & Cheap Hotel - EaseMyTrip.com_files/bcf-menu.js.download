@@ -1,0 +1,1611 @@
+﻿try {
+    var objUrlConfigs = {};
+    objUrlConfigs["AE"] = "https://www.easemytrip.ae/~https://www.easemytrip.ae/hotels/~+971~https://www.easemytrip.ae/img/emt_ae.svg~https://flight.easemytrip.co.th/content/img/curr-icon/black_aed.png~https://www.easemytrip.com/railways~https://www.easemytrip.com/bus/";
+    objUrlConfigs["UK"] = "https://www.easemytrip.co.uk/~https://www.easemytrip.co.uk/hotels/~+44~https://www.easemytrip.co.uk/images/brandlogo/emt_mob_uk.svg~https://flight.easemytrip.co.uk/Content/img/gbp-black.svg~https://www.easemytrip.com/railways~https://www.easemytrip.com/bus/";
+    objUrlConfigs["TH"] = "https://www.easemytrip.co.th/~https://www.easemytrip.co.th/hotels/~+66~https://www.easemytrip.com/images/brandlogo/emt-thb-white.svg~https://flight.easemytrip.co.th/Content/img/curr-icon/thb_black.svg~https://www.easemytrip.com/railways~https://www.easemytrip.com/bus/";
+	objUrlConfigs["US"] = "https://www.easemytrip.us/~https://www.easemytrip.us/hotels/~+91~https://www.easemytrip.com/images/brandlogo/emt-us-white.svg~https://flight.easemytrip.co.th/Content/img/curr-icon/dollar_black.svg~https://www.easemytrip.com/railways~https://www.easemytrip.com/bus/";
+    objUrlConfigs["IN"] = "https://www.easemytrip.com/~https://www.easemytrip.com/hotels/~+91~https://www.easemytrip.com/images/mob-web/svg/emtlogo_new.svg~https://flight.easemytrip.com/Content/img/inr-hotel-tab.png~https://www.easemytrip.com/railways~https://www.easemytrip.com/bus/";
+	objUrlConfigs["QA"] = "https://www.easemytrip.com/c/qa/~https://www.easemytrip.com/c/qa/hotels/~+974~https://www.easemytrip.ae/img/emt_ae.svg~https://flight.easemytrip.co.th/content/img/curr-icon/black_qar.png~https://www.easemytrip.com/railways~https://www.easemytrip.com/bus/";
+	objUrlConfigs["SA"] = "https://www.easemytrip.com/c/sa/~https://www.easemytrip.com/c/sa/hotels/~+966~https://www.easemytrip.ae/img/emt_ae.svg~https://flight.easemytrip.co.th/content/img/curr-icon/black_sar.png~https://www.easemytrip.com/railways~https://www.easemytrip.com/bus/";
+	objUrlConfigs["CSC"] = "https://csc.easemytrip.com/~https://csc.easemytrip.com/hotels/~+91~https://www.easemytrip.com/images/mob-web/svg/emtlogo_new.svg~https://flight.easemytrip.com/Content/img/inr-hotel-tab.png~https://csc.easemytrip.com/railways~https://csc.easemytrip.com/bus/";
+    var TravPolicy={};
+    var redictTologin="";
+     var dom = "";
+    var bcfurlConfig = {};
+    if (window.location.host.replace("www.", "").indexOf("easemytrip") == 0) {
+        dom = window.location.host;
+    } else {
+        
+        if (window.location.host.split('.').length>3) {
+            dom = "." + window.location.host.split('.')[3];
+        }
+        dom = "www."+ window.location.host.split('.')[1] + "." + window.location.host.split('.')[2] + dom;
+    }
+    bcfurlConfig["B2B"] = "https://" + dom + "/agents";
+    bcfurlConfig["CORPORATE"] = "https://" + dom + "/corporate";
+    bcfurlConfig["FRANCHISES"] = "https://" + dom + "/franchises";
+	//var bcfurlConfig = {};
+   // bcfurlConfig["B2B"] = "https://www.easemytrip.com/agents";
+  //  bcfurlConfig["CORPORATE"] = "https://www.easemytrip.com/corporate";
+ //   bcfurlConfig["FRANCHISES"] = "https://www.easemytrip.com/franchises";
+ 
+} catch (ex) { console.log(ex); }
+
+function GetMenuAccessV1() {
+    var ccode = getCookie("ccode");
+    try{
+        if (ccode != "" && ccode.split(',').length > 0) {
+            ccode = ccode.split(',')[0].toUpperCase();
+
+        }
+        else {
+            ccode = "IN";
+        }
+    } catch (ex) { ccode = "IN"; }
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "/Login/AgentMenuAccess",
+        success: function (response) {
+            if (response != null && response != "" && response._pm != null) {
+                bindMenuList(response, ccode);
+            }
+            $(".emt_nav").show();
+        }
+    });
+}
+
+function GetMenuAccessV2() {
+    var cookc = getCookie("XFFGHTYUOP@#$");
+    var ccode = getCookie("ccode");
+    //if (ccode != "" && ccode.split(',').length > 0) {
+    //  ccode = ccode.split(',')[0].toUpperCase();
+
+    //}
+    if (cookc == "") {
+        $(".emt_nav").show();
+        $("#hdrHolidays").show();
+        $("#hdrCabs").show();
+        $("#hdrVisa").show();
+        $("#hdrActivity").show();
+        $("#hdrCharters").show();
+        $("#hdrGiftCard").show();
+        $("#hdrMore").show();
+        $("#hdrCruise").show();
+    }
+    try {
+        if (_CountrySite!=undefined && _CountrySite != null && _CountrySite != "") {
+            ccode = _CountrySite.toUpperCase();
+        } else {
+            ccode = "IN";
+        }
+    } catch (ex) { ccode = "IN"; }
+	
+	var MethodName="GetMenuAccess";
+	//var MethodName="GetMenuAccessV1";
+	if(window.location.host.indexOf("flight.easemytrip")>=0 || true){
+		MethodName="GetMenuAccessV1";
+	}
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "/Login/"+MethodName,//"//" + window.location.host + "/Login/GetMenuAccess",
+        data: JSON.stringify({ Auth: cookc }),
+        success: function (response) {
+            $(".b2c").hide();
+            if (response != null && response != "") {
+                response = JSON.parse(response);
+                response = JSON.parse(response);
+                if (response != null && response != "" && response._pm != null) {
+                    bindMenuList(response, ccode);
+					try{
+						if(response._trvlplcy!=undefined){
+							TravPolicy=response._trvlplcy;
+						}
+						
+					}catch(e){
+						
+					}
+                }
+            }
+        }
+    });
+}
+function bindMenuList(response, ccode) {
+    try {
+        document.getElementById('crpmenu').style.display = 'inline-block';
+        var _pmdata = response._pm;
+        var _lsmdata = response._lsm;
+		redictTologin=_pmdata._url;
+        var html = "";
+		if(window.location.host.toLowerCase()=='csc.easemytrip.com' || window.location.host.toLowerCase()=='cscflights.easemytrip.com' || window.location.host.toLowerCase().indexOf("csc")>-1){
+			 $('.corp-hidden,.cschidden').hide();
+            _pmdata._url="https://csc.easemytrip.com/agents";
+			redictTologin='https://stagingemtservice.easemytrip.com/CSC/Default.aspx';
+			for(let i=0;i<_lsmdata.length;i++){
+				_lsmdata[i].oldUrl=_lsmdata[i].oldUrl.replace('www','csc');
+			}
+			ccode="CSC";
+			try{
+				$('.cscshw').show();
+			}
+			catch(e){ };
+        }
+		if (_pmdata._fl || _pmdata._ht || _pmdata._bs || _pmdata._cr || _pmdata._tr || _pmdata._hd) {
+            if (!_pmdata._fl && (window.location.href.split('?')[0] == objUrlConfigs[ccode].split('~')[0] || window.location.href.split('?')[0] == objUrlConfigs[ccode].split('~')[0]+"/flights.html")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            } else if (!_pmdata._ht && (window.location.href.split('?')[0] == objUrlConfigs[ccode].split('~')[1] || window.location.href.split('?')[0] == "https://www.easemytrip.ae/hotels" || window.location.href.split('?')[0] == "https://www.easemytrip.co.uk/hotels" || window.location.href.split('?')[0] == "https://www.easemytrip.co.th/hotels" || window.location.href.split('?')[0] == "https://www.easemytrip.com/hotels")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            } else if (!_pmdata._bs && (window.location.href == "https://www.easemytrip.com/bus/" || window.location.href == "https://www.easemytrip.com/bus")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            }
+            else if (!_pmdata._cr && (window.location.href == "https://www.easemytrip.com/cabs/" || window.location.href == "https://www.easemytrip.com/cabs")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            }
+            else if (!_pmdata._tr && (window.location.href == "https://www.easemytrip.com/railways/" || window.location.href == "https://www.easemytrip.com/railways")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            }
+            else if (!_pmdata._hd && (window.location.href == "https://www.easemytrip.com/holidays/" || window.location.href == "https://www.easemytrip.com/holidays")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            }
+        } else {
+            window.location.href = _pmdata._url + "/Home/Index";
+        }
+		if (response.isDeactivate) {
+            logoutbcf();
+        }
+		
+        $("#menuaccess").html('');
+        html += "<li><a href=\"" + _pmdata._url + "/Home/Index?searchid=\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/dashboard-ico.svg\"></span>Dashboard</a></li>"
+        html += "<li><a href=\"" + _pmdata._url + "/Dashboard/Index\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/support-ico.svg\"></span>Support</a></li>"
+
+        if (_pmdata._bl) {
+            html += "<li><a href=\"" + _pmdata._url + "/AirBookingList/AirBookingList\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/booking-list-ico.svg\"></span>Bookings</a></li>"
+        }
+		
+		 var trvlRq = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 22;
+        });
+			
+        if (_pmdata._trprq && trvlRq.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"TRVLPS\" class=\"feat-btn\" onclick=\"togglesubmenu(TRVLPS,STRVLPS);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/booking-list-ico.svg\"></span> Travel Request <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (trvlRq.length > 0) {
+                html += "<ul id=\"STRVLPS\" class=\"feat-show cs_bck\">";
+                $.each(trvlRq, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+
+        var trpRq = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 26;
+        });
+
+        if (_pmdata._trprq && trpRq.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"TRPPS\" class=\"feat-btn\" onclick=\"togglesubmenu(TRPPS,STRPS);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/booking-list-ico.svg\"></span> Trip Request <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (trpRq.length > 0) {
+                html += "<ul id=\"STRPS\" class=\"feat-show cs_bck\">";
+                $.each(trpRq, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+		
+        var sprs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 15;
+        });
+
+        if (false && _pmdata._sp && sprs.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"SPS\" class=\"feat-btn\" onclick=\"togglesubmenu(SPS,SSPS);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/bkng-sm.svg\"></span> Support<span class=\"first down_arw_mnu\"></span></a>";
+
+            if (sprs.length > 0) {
+                html += "<ul id=\"SSPS\" class=\"feat-show cs_bck\">";
+                $.each(sprs, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        var fls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 1;
+        });
+
+        var headHtml = "";
+
+
+        // if (_pmdata._fl && fls.length > 0) {
+
+            // if (fls.length > 0) {
+
+        // $.each(fls, function (key, val) {
+        // if (val.name.indexOf("Search Fares") >= 0 || val.name.indexOf("Search") >= 0) {
+        // headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[0] + "flights.html\">Flights</a></li>";
+        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[0] + "flights.html\"><span class=\"meuicowidth flightmenuico\"></span><span>Flights</span></a></li>";
+        // }
+        // });
+        // }
+
+        // }
+        var bls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 8;
+        });
+        if (false && _pmdata._bl && bls.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"BL\" class=\"feat-btn\" onclick=\"togglesubmenu(BL,SBL);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/bkng-sm.svg\"></span>Booking List <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (bls.length > 0) {
+                html += "<ul id=\"SBL\" class=\"feat-show cs_bck\">";
+                $.each(bls, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+
+            html += "</li>";
+        }
+        //2
+        var hols = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 2;
+        });
+         if (_pmdata._ht) {
+
+             $.each(hols, function (key, val) {
+                 if (val.name.indexOf("Search Hotel") >= 0 || val.name.indexOf("Search") >= 0) {
+
+                    // headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[1] + "\">Hotels</a></li>";
+                    headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[1] + "\"><span class=\"meuicowidth hotelmenuico\"></span><span>Hotels</span></a></li>";
+
+                 }
+             });
+
+
+         }
+
+
+        var trs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 13;
+        });
+		if(redictTologin.split('/')[redictTologin.split('/').length-1]=='corporate'){
+            trs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 23;
+        });
+        }
+
+
+        if (_pmdata._tr && trs.length > 0) {
+
+            if (trs.length > 0) {
+
+                $.each(trs, function (key, val) {
+
+                    if (val.name.indexOf("Search Train") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[5] + "\"><span class=\"meuicowidth trainmenuico\"></span><span>Trains</span></a></li>";
+                });
+
+
+            }
+
+
+        }
+
+        var buss = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 3;
+        });
+        if (_pmdata._bs && buss.length > 0) {
+
+            if (buss.length > 0) {
+
+                $.each(buss, function (key, val) {
+
+                    if (val.name.indexOf("Search Bus") >= 0 || val.name.indexOf("Search") >= 0)
+                        //headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">Bus</a></li>";
+                        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[0] + "bus\"><span class=\"meuicowidth busmenuico\"></span><span>Bus</span></a></li>";
+                });
+            }
+        }
+        if (_pmdata._hd) {
+            // headHtml += "<li><a href=\"https://www.easemytrip.com/holidays\">Holidays</a></li>";
+            headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[0] + "holidays\"><span class=\"meuicowidth holidaymenuico\"></span><span>Holidays</span></a></li>";
+        }
+        var crs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 4;
+        });
+        if (_pmdata._cr && crs.length > 0) {
+            if (crs.length > 0) {
+                $.each(crs, function (key, val) {
+                    if (val.name.indexOf("Search Car") >= 0 || val.name.indexOf("Search") >= 0)
+                        // headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">" + val.name + "</a></li>";
+                        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[0] + "cabs\"><span class=\"meuicowidth cabmenuico\"></span><span>CABS</span></a></li>";
+                });
+            }
+        }
+        var adms = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 6;
+        });
+        if (_pmdata._ad && adms.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"ADL\" class=\"feat-btn\" onclick=\"togglesubmenu(ADL,SADL);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/admin-ico.svg\"></span> Admin <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (adms.length > 0) {
+                html += "<ul id=\"SADL\" class=\"feat-show cs_bck\">";
+                $.each(adms, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+
+            html += "</li>";
+        }
+
+        var acs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 9;
+        });
+        if (_pmdata._as && acs.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"AC\" class=\"feat-btn\" onclick=\"togglesubmenu(AC,SAC);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/finance-ico.svg\"></span> Finance <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (acs.length > 0) {
+                html += "<ul id=\"SAC\" class=\"feat-show cs_bck\">";
+                $.each(acs, function (key, val) {
+                    //if (val.name.toUpperCase() != "GST") {
+                        html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                    //}
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        var rps = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 7;
+        });
+        if (_pmdata._rs && rps.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"RPSC\" class=\"feat-btn\" onclick=\"togglesubmenu(RPSC,SRPSC);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/reports-ico.svg\"></span> Reports <span class=\"first down_arw_mnu\"></span></a>";
+            if (rps.length > 0) {
+                html += "<ul id=\"SRPSC\" class=\"feat-show cs_bck\">";
+                $.each(rps, function (key, val) {
+
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+
+
+        var qrys = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 11;
+        });
+        if (_pmdata._qy && qrys.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"QDL\" class=\"feat-btn\" onclick=\"togglesubmenu(QDL,SQADL);\"><span class=\"sm_mage\"></span>Query <span class=\"first down_arw_mnu\"></span></a>";
+            if (qrys.length > 0) {
+                html += "<ul id=\"SQADL\" class=\"feat-show cs_bck\">";
+                $.each(qrys, function (key, val) {
+
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        if (_pmdata._lq) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"LQ\" class=\"feat-btn\" onclick=\"togglesubmenu(LQ,SLQ);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/leads-ico.svg\"></span>Lead <span class=\"first down_arw_mnu\"></span></a>";
+            html += "<ul class=\"feat-show cs_bck\" id=\"SLQ\">";
+            html += "<li>";
+            html += "<a href=\"javascript:void(0)\" id=\"MSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(MSLQ,SSLQ);\">Manage My Leads <span class=\"third  down_arw_mnu\"></span></a>";
+
+            html += "<ul class=\"serv-show2\" id=\"SSLQ\">";
+            html += "<li><a href=\"" + _pmdata._url + "/NewQuery/NewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadUnAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Unassigned List</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Assigned List</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/CloseQuery/CustomerAcceptancePendingList?searchid=%3Fsearchid%3D\" target=\"_blank\">Close Query</a></li>";
+            html += "</ul>";
+            html += "<a href=\"javascript:void(0)\" id=\"BBSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(BBSLQ,BSSLQ);\">Buy & Sell Leads <span class=\"third  down_arw_mnu\"></span></a>";
+            html += "<ul class=\"serv-show2\" id=\"BSSLQ\">";
+            html += "<li><a href=\"" + _pmdata._url + "/NewQuery/BuySellNewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/BuyQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">Buy Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/SellList?searchid=%3Fsearchid%3D\" target=\"_blank\">Sell List</a></li>";
+            html += "</ul>";
+
+            html += "</li>";
+            html += "</ul>";
+
+
+
+            html += "</li>";
+
+
+
+        }
+        $("#myTopnav").children("div").find("ul").html("");
+        $("#myTopnav").children("div").find("ul").html(headHtml);
+        $("#menuaccess").append(html);
+		if (response._bkblnc != null && response._bkblnc != "" && response._bkblnc.split('|').length > 1) {
+            //$("#divB2BAgent").show();
+            if (document.getElementById("HABal") != null) {
+                $("#HABal").text(response._bkblnc.split('|')[0]);
+                $("#HSbal").text(response._bkblnc.split('|')[1]);
+				if(document.getElementById("BookingBalance")!=null){
+					 $("#BookingBalance").text(response._bkblnc.split('|')[0]);
+				}
+				if(document.getElementById("AgentAmount")!=null){
+					 $("#AgentAmount").val(response._bkblnc.split('|')[0]);
+				}
+            }
+			
+			
+        }
+		
+
+        var ccodes = "IN";
+        try{
+            ccodes = window.location.host.split('.')[window.location.host.split('.').length - 1].toUpperCase().replace("COM", 'IN');
+		if ($("#divB2BAgent") != null && $("#divB2BAgent").length > 0) {
+            $("#divB2BAgent").find('.rupeb2b').find('img').attr("src", objUrlConfigs[ccode].split('~')[4]).attr("alt", "currency symbol");
+            }			
+        } catch (ex) { ccodes = "IN"; }
+		if(redictTologin.split('/')[redictTologin.split('/').length-1].toLowerCase()=='corporate')
+		{
+			$(".logo-lg").find('img').attr('src','https://www.easemytrip.com/corporate/Content/assets/dist/img/logo_emtdesk.svg');
+			}else if(redictTologin.split('/')[redictTologin.split('/').length-1].toLowerCase()=='agents'){
+			//$(".logo-lg").find('img').attr("src", objUrlConfigs[ccodes].split('~')[3]);
+			$(".logo-lg").find('img').attr('src','https://www.easemytrip.com/agents/content/assets/dist/img/EMTMate-logo-white.svg');
+			}
+    } catch (ex) { console.log(ex); }
+}
+
+function bindMenuList_old(response, ccode) {
+    try {
+        document.getElementById('crpmenu').style.display = 'inline-block';
+        var _pmdata = response._pm;
+        var _lsmdata = response._lsm;
+		redictTologin=_pmdata._url;
+        var html = "";
+		
+		if (_pmdata._fl || _pmdata._ht || _pmdata._bs || _pmdata._cr || _pmdata._tr || _pmdata._hd) {
+            if (!_pmdata._fl && (window.location.href.split('?')[0] == objUrlConfigs[ccode].split('~')[0] || window.location.href.split('?')[0] == objUrlConfigs[ccode].split('~')[0]+"/flights.html")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            } else if (!_pmdata._ht && (window.location.href.split('?')[0] == objUrlConfigs[ccode].split('~')[1] || window.location.href.split('?')[0] == "https://www.easemytrip.ae/hotels" || window.location.href.split('?')[0] == "https://www.easemytrip.co.uk/hotels" || window.location.href.split('?')[0] == "https://www.easemytrip.co.th/hotels" || window.location.href.split('?')[0] == "https://www.easemytrip.com/hotels")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            } else if (!_pmdata._bs && (window.location.href == "https://www.easemytrip.com/bus/" || window.location.href == "https://www.easemytrip.com/bus")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            }
+            else if (!_pmdata._cr && (window.location.href == "https://www.easemytrip.com/cabs/" || window.location.href == "https://www.easemytrip.com/cabs")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            }
+            else if (!_pmdata._tr && (window.location.href == "https://www.easemytrip.com/railways/" || window.location.href == "https://www.easemytrip.com/railways")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            }
+            else if (!_pmdata._hd && (window.location.href == "https://www.easemytrip.com/holidays/" || window.location.href == "https://www.easemytrip.com/holidays")) {
+                window.location.href = _pmdata._url + "/Home/Index";
+            }
+        } else {
+            window.location.href = _pmdata._url + "/Home/Index";
+        }
+		if (response.isDeactivate) {
+            logoutbcf();
+        }
+		
+        $("#menuaccess").html('');
+        html += "<li><a href=\"" + _pmdata._url + "/Home/Index?searchid=\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/dashboard-ico.svg\"></span>Dashboard</a></li>"
+        html += "<li><a href=\"" + _pmdata._url + "/Dashboard/Index\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/support-ico.svg\"></span>Support</a></li>"
+
+        if (_pmdata._bl) {
+            html += "<li><a href=\"" + _pmdata._url + "/AirBookingList/AirBookingList\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/booking-list-ico.svg\"></span>Bookings</a></li>"
+        }
+		
+		 var trvlRq = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 22;
+        });
+
+        if (_pmdata._trprq && trvlRq.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"TRVLPS\" class=\"feat-btn\" onclick=\"togglesubmenu(TRVLPS,STRVLPS);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/booking-list-ico.svg\"></span> Travel Request <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (trvlRq.length > 0) {
+                html += "<ul id=\"STRVLPS\" class=\"feat-show cs_bck\">";
+                $.each(trvlRq, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+
+        var trpRq = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 26;
+        });
+
+        if (_pmdata._trprq && trpRq.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"TRPPS\" class=\"feat-btn\" onclick=\"togglesubmenu(TRPPS,STRPS);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/booking-list-ico.svg\"></span> Trip Request <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (trpRq.length > 0) {
+                html += "<ul id=\"STRPS\" class=\"feat-show cs_bck\">";
+                $.each(trpRq, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+		
+        var sprs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 15;
+        });
+
+        if (false && _pmdata._sp && sprs.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"SPS\" class=\"feat-btn\" onclick=\"togglesubmenu(SPS,SSPS);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/bkng-sm.svg\"></span> Support<span class=\"first down_arw_mnu\"></span></a>";
+
+            if (sprs.length > 0) {
+                html += "<ul id=\"SSPS\" class=\"feat-show cs_bck\">";
+                $.each(sprs, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        var fls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 1;
+        });
+
+        var headHtml = "";
+
+
+        // if (_pmdata._fl && fls.length > 0) {
+
+            // if (fls.length > 0) {
+
+                // $.each(fls, function (key, val) {
+                    // if (val.name.indexOf("Search Fares") >= 0 || val.name.indexOf("Search") >= 0) {
+                        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[0] + "flights.html\">Flights</a></li>";
+                    // }
+                // });
+            // }
+
+        // }
+        var bls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 8;
+        });
+        if (false && _pmdata._bl && bls.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"BL\" class=\"feat-btn\" onclick=\"togglesubmenu(BL,SBL);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/bkng-sm.svg\"></span>Booking List <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (bls.length > 0) {
+                html += "<ul id=\"SBL\" class=\"feat-show cs_bck\">";
+                $.each(bls, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+
+            html += "</li>";
+        }
+        //2
+        var hols = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 2;
+        });
+         if (_pmdata._ht) {
+
+             $.each(hols, function (key, val) {
+                 if (val.name.indexOf("Search Hotel") >= 0 || val.name.indexOf("Search") >= 0) {
+
+                    headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[1] + "\">Hotels</a></li>";
+
+                 }
+             });
+
+
+         }
+
+
+        var trs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 13;
+        });
+		if(redictTologin.split('/')[redictTologin.split('/').length-1]=='corporate'){
+            trs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 23;
+        });
+        }
+
+
+        if (_pmdata._tr && trs.length > 0) {
+
+            if (trs.length > 0) {
+
+                $.each(trs, function (key, val) {
+
+                    if (val.name.indexOf("Search Train") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[5] + "\">Trains</a></li>";
+                });
+
+
+            }
+
+
+        }
+
+        var buss = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 3;
+        });
+        if (_pmdata._bs && buss.length > 0) {
+
+            if (buss.length > 0) {
+
+                $.each(buss, function (key, val) {
+
+                    if (val.name.indexOf("Search Bus") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[6] + "\">Bus</a></li>";
+                });
+            }
+        }
+		if (_pmdata._hd) {
+            headHtml += "<li><a href=\"https://www.easemytrip.com/holidays\">Holidays</a></li>";
+        }
+        var crs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 4;
+        });
+        if (_pmdata._cr && crs.length > 0) {
+            if (crs.length > 0) {
+                $.each(crs, function (key, val) {
+                    if (val.name.indexOf("Search Car") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">" + val.name + "</a></li>";
+                });
+            }
+        }
+        var adms = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 6;
+        });
+        if (_pmdata._ad && adms.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"ADL\" class=\"feat-btn\" onclick=\"togglesubmenu(ADL,SADL);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/admin-ico.svg\"></span> Admin <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (adms.length > 0) {
+                html += "<ul id=\"SADL\" class=\"feat-show cs_bck\">";
+                $.each(adms, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+
+            html += "</li>";
+        }
+
+        var acs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 9;
+        });
+        if (_pmdata._as && acs.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"AC\" class=\"feat-btn\" onclick=\"togglesubmenu(AC,SAC);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/finance-ico.svg\"></span> Finance <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (acs.length > 0) {
+                html += "<ul id=\"SAC\" class=\"feat-show cs_bck\">";
+                $.each(acs, function (key, val) {
+                    //if (val.name.toUpperCase() != "GST") {
+                        html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                    //}
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        var rps = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 7;
+        });
+        if (_pmdata._rs && rps.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"RPSC\" class=\"feat-btn\" onclick=\"togglesubmenu(RPSC,SRPSC);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/reports-ico.svg\"></span> Reports <span class=\"first down_arw_mnu\"></span></a>";
+            if (rps.length > 0) {
+                html += "<ul id=\"SRPSC\" class=\"feat-show cs_bck\">";
+                $.each(rps, function (key, val) {
+
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+
+
+        var qrys = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 11;
+        });
+        if (_pmdata._qy && qrys.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"QDL\" class=\"feat-btn\" onclick=\"togglesubmenu(QDL,SQADL);\"><span class=\"sm_mage\"></span>Query <span class=\"first down_arw_mnu\"></span></a>";
+            if (qrys.length > 0) {
+                html += "<ul id=\"SQADL\" class=\"feat-show cs_bck\">";
+                $.each(qrys, function (key, val) {
+
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        if (_pmdata._lq) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"LQ\" class=\"feat-btn\" onclick=\"togglesubmenu(LQ,SLQ);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/leads-ico.svg\"></span>Lead <span class=\"first down_arw_mnu\"></span></a>";
+            html += "<ul class=\"feat-show cs_bck\" id=\"SLQ\">";
+            html += "<li>";
+            html += "<a href=\"javascript:void(0)\" id=\"MSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(MSLQ,SSLQ);\">Manage My Leads <span class=\"third  down_arw_mnu\"></span></a>";
+
+            html += "<ul class=\"serv-show2\" id=\"SSLQ\">";
+            html += "<li><a href=\"" + _pmdata._url + "/NewQuery/NewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadUnAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Unassigned List</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Assigned List</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/CloseQuery/CustomerAcceptancePendingList?searchid=%3Fsearchid%3D\" target=\"_blank\">Close Query</a></li>";
+            html += "</ul>";
+            html += "<a href=\"javascript:void(0)\" id=\"BBSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(BBSLQ,BSSLQ);\">Buy & Sell Leads <span class=\"third  down_arw_mnu\"></span></a>";
+            html += "<ul class=\"serv-show2\" id=\"BSSLQ\">";
+            html += "<li><a href=\"" + _pmdata._url + "/NewQuery/BuySellNewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/BuyQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">Buy Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/SellList?searchid=%3Fsearchid%3D\" target=\"_blank\">Sell List</a></li>";
+            html += "</ul>";
+
+            html += "</li>";
+            html += "</ul>";
+
+
+
+            html += "</li>";
+
+
+
+        }
+        $("#myTopnav").children("div").find("ul").html("");
+        $("#myTopnav").children("div").find("ul").html(headHtml);
+        $("#menuaccess").append(html);
+		if (response._bkblnc != null && response._bkblnc != "" && response._bkblnc.split('|').length > 1) {
+            //$("#divB2BAgent").show();
+            if (document.getElementById("HABal") != null) {
+                $("#HABal").text(response._bkblnc.split('|')[0]);
+                $("#HSbal").text(response._bkblnc.split('|')[1]);
+				if(document.getElementById("BookingBalance")!=null){
+					 $("#BookingBalance").text(response._bkblnc.split('|')[0]);
+				}
+				if(document.getElementById("AgentAmount")!=null){
+					 $("#AgentAmount").val(response._bkblnc.split('|')[0]);
+				}
+            }
+			
+			
+        }
+		
+
+        var ccodes = "IN";
+        try{
+            ccodes = window.location.host.split('.')[window.location.host.split('.').length - 1].toUpperCase().replace("COM", 'IN');
+		if ($("#divB2BAgent") != null && $("#divB2BAgent").length > 0) {
+            $("#divB2BAgent").find('.rupeb2b').find('img').attr("src", objUrlConfigs[ccode].split('~')[4]).attr("alt", "currency symbol");
+            }			
+        } catch (ex) { ccodes = "IN"; }
+        $(".logo-lg").find('img').attr("src", objUrlConfigs[ccodes].split('~')[3]);
+    } catch (ex) { console.log(ex); }
+}
+
+function bindMenuList1(response, ccode) {
+    try {
+        document.getElementById('crpmenu').style.display = 'inline-block';
+        var _pmdata = response._pm;
+        var _lsmdata = response._lsm;
+        var html = "";
+        $("#menuaccess").html('');
+        html += "<li><a href=\"" + _pmdata._url + "/Home/Index?searchid=\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/dash-sm.svg\"></span>Dashboard</a></li>"
+        var sprs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 15;
+        });
+
+        if (_pmdata._sp && sprs.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"SPS\" class=\"feat-btn\" onclick=\"togglesubmenu(SPS,SSPS);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/bkng-sm.svg\"></span> Support<span class=\"first down_arw_mnu\"></span></a>";
+
+            if (sprs.length > 0) {
+                html += "<ul id=\"SSPS\" class=\"feat-show cs_bck\">";
+                $.each(sprs, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        var fls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 1;
+        });
+
+        var headHtml = "";
+
+
+        if (_pmdata._fl && fls.length > 0) {
+
+            if (fls.length > 0) {
+
+                $.each(fls, function (key, val) {
+                    if (val.name.indexOf("Search Fares") >= 0 || val.name.indexOf("Search") >= 0) {
+                        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[0] + "flights.html\">Flights</a></li>";
+                    }
+                });
+            }
+
+        }
+        var bls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 8;
+        });
+        if (_pmdata._bl && bls.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"BL\" class=\"feat-btn\" onclick=\"togglesubmenu(BL,SBL);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/bkng-sm.svg\"></span>Booking List <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (bls.length > 0) {
+                html += "<ul id=\"SBL\" class=\"feat-show cs_bck\">";
+                $.each(bls, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+
+            html += "</li>";
+        }
+        //2
+        var hols = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 2;
+        });
+        if (_pmdata._ht) {
+
+            $.each(hols, function (key, val) {
+                if (val.name.indexOf("Search Hotel") >= 0 || val.name.indexOf("Search") >= 0) {
+
+                    headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[1] + "\">Hotels</a></li>";
+
+                }
+            });
+
+
+        }
+
+
+        var trs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 13;
+        });
+        if (_pmdata._tr && trs.length > 0) {
+
+            if (trs.length > 0) {
+
+                $.each(trs, function (key, val) {
+
+                    if (val.name.indexOf("Search Train") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">Trains</a></li>";
+                });
+
+
+            }
+
+
+        }
+
+        var buss = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 3;
+        });
+        if (_pmdata._bs && buss.length > 0) {
+
+            if (buss.length > 0) {
+
+                $.each(buss, function (key, val) {
+
+                    if (val.name.indexOf("Search Bus") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">Bus</a></li>";
+                });
+            }
+        }
+        var crs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 4;
+        });
+        if (_pmdata._cr && crs.length > 0) {
+            if (crs.length > 0) {
+                $.each(crs, function (key, val) {
+                    if (val.name.indexOf("Search Car") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">" + val.name + "</a></li>";
+                });
+            }
+        }
+        var adms = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 6;
+        });
+        if (_pmdata._ad && adms.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"ADL\" class=\"feat-btn\" onclick=\"togglesubmenu(ADL,SADL);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/admin-sm.svg\"></span> Admin <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (adms.length > 0) {
+                html += "<ul id=\"SADL\" class=\"feat-show cs_bck\">";
+                $.each(adms, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+
+            html += "</li>";
+        }
+
+        var acs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 9;
+        });
+        if (_pmdata._as && acs.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"AC\" class=\"feat-btn\" onclick=\"togglesubmenu(AC,SAC);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/acc-sm.svg\"></span> Accounts <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (acs.length > 0) {
+                html += "<ul id=\"SAC\" class=\"feat-show cs_bck\">";
+                $.each(acs, function (key, val) {
+                    if (val.name.toUpperCase() != "GST") {
+                        html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                    }
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        var rps = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 7;
+        });
+        if (_pmdata._rs && rps.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"RPSC\" class=\"feat-btn\" onclick=\"togglesubmenu(RPSC,SRPSC);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/acc-sm.svg\"></span> Reports <span class=\"first down_arw_mnu\"></span></a>";
+            if (rps.length > 0) {
+                html += "<ul id=\"SRPSC\" class=\"feat-show cs_bck\">";
+                $.each(rps, function (key, val) {
+
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+
+
+        var qrys = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 11;
+        });
+        if (_pmdata._qy && qrys.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"QDL\" class=\"feat-btn\" onclick=\"togglesubmenu(QDL,SQADL);\">Query <span class=\"first down_arw_mnu\"></span></a>";
+            if (qrys.length > 0) {
+                html += "<ul id=\"SQADL\" class=\"feat-show cs_bck\">";
+                $.each(qrys, function (key, val) {
+
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        if (_pmdata._lq) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"LQ\" class=\"feat-btn\" onclick=\"togglesubmenu(LQ,SLQ);\">Lead <span class=\"first down_arw_mnu\"></span></a>";
+            html += "<ul class=\"feat-show cs_bck\" id=\"SLQ\">";
+            html += "<li>";
+            html += "<a href=\"javascript:void(0)\" id=\"MSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(MSLQ,SSLQ);\">Manage My Leads <span class=\"third  down_arw_mnu\"></span></a>";
+
+            html += "<ul class=\"serv-show2\" id=\"SSLQ\">";
+            html += "<li><a href=\"" + _pmdata._url + "/NewQuery/NewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadUnAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Unassigned List</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Assigned List</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/CloseQuery/CustomerAcceptancePendingList?searchid=%3Fsearchid%3D\" target=\"_blank\">Close Query</a></li>";
+            html += "</ul>";
+            html += "<a href=\"javascript:void(0)\" id=\"BBSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(BBSLQ,BSSLQ);\">Buy & Sell Leads <span class=\"third  down_arw_mnu\"></span></a>";
+            html += "<ul class=\"serv-show2\" id=\"BSSLQ\">";
+            html += "<li><a href=\"" + _pmdata._url + "/NewQuery/BuySellNewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/BuyQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">Buy Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/SellList?searchid=%3Fsearchid%3D\" target=\"_blank\">Sell List</a></li>";
+            html += "</ul>";
+
+            html += "</li>";
+            html += "</ul>";
+
+
+
+            html += "</li>";
+
+
+
+        }
+        $("#myTopnav").children("div").find("ul").html("");
+        $("#myTopnav").children("div").find("ul").html(headHtml);
+        $("#menuaccess").append(html);
+    } catch (ex) { console.log(ex); }
+}
+
+function bindMenuListold(response, ccode) {
+    try {
+        document.getElementById('crpmenu').style.display = 'inline-block';
+        var _pmdata = response._pm;
+        var _lsmdata = response._lsm;
+        var html = "";
+        $("#menuaccess").html('');
+
+
+        var headHtml = "";
+
+        html += "<li><a href=\"" + _pmdata._url + "/Home/Index?searchid=\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"/agents/Content/imgnew/dash-sm.svg\"></span>  Dashboard </a></li>"
+        var sprs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 15;
+        });
+
+        if (_pmdata._sp && sprs.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"SPS\" class=\"feat-btn\" onclick=\"togglesubmenu(SPS,SSPS);\"> <span class=\"sm_mage\"><img src=\"/agents/Content/imgnew/bkng-sm.svg\"></span> Support <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (sprs.length > 0) {
+                html += "<ul id=\"SSPS\" class=\"feat-show cs_bck\">";
+                $.each(sprs, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        var fls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 1;
+        });
+
+        if (_pmdata._fl && fls.length > 0) {
+
+            if (fls.length > 0) {
+                $.each(fls, function (key, val) {
+                    if (val.name.indexOf("Search Fares") >= 0 || val.name.indexOf("Search") >= 0) {
+                        headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[0] + "flights.html\">" + $("#hdnMenuLag").val().split('|')[0] + "</a></li>";
+                    }
+                });
+
+
+            }
+        }
+        var bls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 8;
+        });
+        if (_pmdata._bl && bls.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"BL\" class=\"feat-btn\" onclick=\"togglesubmenu(BL,SBL);\"><span class=\"sm_mage\"><img src=\"/agents/Content/imgnew/bkng-sm.svg\"></span>Booking List <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (bls.length > 0) {
+                html += "<ul id=\"SBL\" class=\"feat-show cs_bck\">";
+                $.each(bls, function (key, val) {
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+
+            html += "</li>";
+        }
+        //2
+        var hols = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 2;
+        });
+        if (_pmdata._ht) {
+            $.each(hols, function (key, val) {
+                if (val.name.indexOf("Search Hotel") >= 0 || val.name.indexOf("Search") >= 0) {
+                    headHtml += "<li><a href=\"" + objUrlConfigs[ccode].split('~')[1] + "\">" + $("#hdnMenuLag").val().split('|')[1] + "</a></li>";
+                }
+            });
+        }
+
+
+        var trs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 13;
+        });
+        if (_pmdata._tr && trs.length > 0) {
+            if (trs.length > 0) {
+                $.each(trs, function (key, val) {
+                    if (val.name.indexOf("Search Train") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">" + $("#hdnMenuLag").val().split('|')[2] + "</a></li>";
+                });
+            }
+        }
+
+        var buss = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 3;
+        });
+        if (_pmdata._bs && buss.length > 0) {
+            if (buss.length > 0) {
+                $.each(buss, function (key, val) {
+                    if (val.name.indexOf("Search Bus") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">" + $("#hdnMenuLag").val().split('|')[3] + "</a></li>";
+                });
+            }
+        }
+        var crs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 4;
+        });
+        if (_pmdata._cr && crs.length > 0) {
+            if (crs.length > 0) {
+                $.each(crs, function (key, val) {
+                    //html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                    if (val.name.indexOf("Search Car") >= 0 || val.name.indexOf("Search") >= 0)
+                        headHtml += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\">" + $("#hdnMenuLag").val().split('|')[4] + "</a></li>";
+                });
+            }
+        }
+        var adms = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 6;
+        });
+        if (_pmdata._ad && adms.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"ADL\" class=\"feat-btn\" onclick=\"togglesubmenu(ADL,SADL);\"><span class=\"sm_mage\"><img src=\"/agents/Content/imgnew/admin-sm.svg\"></span> Admin <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (adms.length > 0) {
+                html += "<ul id=\"SADL\" class=\"feat-show cs_bck\">";
+
+                $.each(adms, function (key, val) {
+                    /* if(val.name=="Set Markup"){
+    val.url="/agents/MarkUp/SetMarkup";
+    }
+    if(val.name=="Show Commision Detail"){
+    val.url="/agents/CommisionDetail/CommisionDetail";
+    }
+    if(val.name=="Account Information"){
+    val.url="/agents/UpdateProfile/UpdateProfile";
+    } */
+
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+
+            html += "</li>";
+        }
+
+        var acs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 9;
+        });
+        if (_pmdata._as && acs.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"AC\" class=\"feat-btn\" onclick=\"togglesubmenu(AC,SAC);\"><span class=\"sm_mage\"><img src=\"/agents/Content/imgnew/acc-sm.svg\"></span> Accounts <span class=\"first down_arw_mnu\"></span></a>";
+
+            if (acs.length > 0) {
+                html += "<ul id=\"SAC\" class=\"feat-show cs_bck\">";
+                $.each(acs, function (key, val) {
+                    if (val.name.toUpperCase() != "GST") {
+                        html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                    }
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        var rps = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 7;
+        });
+        if (_pmdata._rs && rps.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"RPSC\" class=\"feat-btn\" onclick=\"togglesubmenu(RPSC,SRPSC);\"><span class=\"sm_mage\"><img src=\"/agents/Content/imgnew/acc-sm.svg\"></span> Reports <span class=\"first down_arw_mnu\"></span></a>";
+            if (rps.length > 0) {
+                html += "<ul id=\"SRPSC\" class=\"feat-show cs_bck\">";
+                $.each(rps, function (key, val) {
+                    // if(val.name=="MIS Paxwise Report"){
+                    // val.url="/agents/MISReportConfirmList/MISReportConfirmList";
+                    //}
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+
+
+        var qrys = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 11;
+        });
+        if (_pmdata._qy && qrys.length > 0) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"QDL\" class=\"feat-btn\" onclick=\"togglesubmenu(QDL,SQADL);\">Query <span class=\"first down_arw_mnu\"></span></a>";
+            if (qrys.length > 0) {
+                html += "<ul id=\"SQADL\" class=\"feat-show cs_bck\">";
+                $.each(qrys, function (key, val) {
+
+                    html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                });
+
+                html += "</ul>";
+            }
+            html += "</li>";
+        }
+        if (_pmdata._lq) {
+            html += "<li>";
+
+            html += "<a href=\"javascript:void(0)\" id=\"LQ\" class=\"feat-btn\" onclick=\"togglesubmenu(LQ,SLQ);\">Lead <span class=\"first down_arw_mnu\"></span></a>";
+            html += "<ul class=\"feat-show cs_bck\" id=\"SLQ\">";
+            html += "<li>";
+            html += "<a href=\"javascript:void(0)\" id=\"MSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(MSLQ,SSLQ);\">Manage My Leads <span class=\"third  down_arw_mnu\"></span></a>";
+
+            html += "<ul class=\"serv-show2\" id=\"SSLQ\">";
+            html += "<li><a href=\"" + _pmdata._url + "/NewQuery/NewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadUnAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Unassigned List</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Assigned List</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/CloseQuery/CustomerAcceptancePendingList?searchid=%3Fsearchid%3D\" target=\"_blank\">Close Query</a></li>";
+            html += "</ul>";
+            html += "<a href=\"javascript:void(0)\" id=\"BBSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(BBSLQ,BSSLQ);\">Buy & Sell Leads <span class=\"third  down_arw_mnu\"></span></a>";
+            html += "<ul class=\"serv-show2\" id=\"BSSLQ\">";
+            html += "<li><a href=\"" + _pmdata._url + "/NewQuery/BuySellNewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/BuyQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">Buy Query</a></li>";
+            html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/SellList?searchid=%3Fsearchid%3D\" target=\"_blank\">Sell List</a></li>";
+            html += "</ul>";
+
+            html += "</li>";
+            html += "</ul>";
+
+
+
+            html += "</li>";
+
+
+
+        }
+        $("#myTopnav").children("div").find("ul").html("");
+        $("#myTopnav").children("div").find("ul").html(headHtml);
+        $("#menuaccess").append(html);
+    } catch (ex) { console.log(ex); }
+}
+
+
+
+
+
+
+function GetMenuAccessMobV1() {
+    var ccode = getCookie("ccode");
+    try {
+        //$(".product-b,.common-b").hide();
+        if (ccode != "" && ccode.split(',').length > 0) {
+            ccode = ccode.split(',')[0].toUpperCase();
+
+        }
+        else {
+            ccode = "IN";
+        }
+    } catch (ex) { ccode = "IN"; }
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "/Login/AgentMenuAccess",
+        success: function (response) {
+            if (response != null && response != "" && response._pm != null) {
+				$(".product-b,.common-b").hide();
+                bindMobMenuList(response, ccode);
+            }
+            $(".emt_nav").show();
+        }
+    });
+}
+
+function bindMobMenuList(response, ccode) {
+    try{
+        var _pmdata = response._pm;
+        var _lsmdata = response._lsm;
+        var html = "";
+        redictTologin=_pmdata._url;
+        var fls = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 1;
+        });
+        if (_pmdata._fl && fls.length > 0) {
+            $(".flight-b").show();
+        }
+        var hols = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 2;
+        });
+        if (_pmdata._ht) {
+            $(".hotel-b").show();
+        }
+
+        var trs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 13;
+        });
+        if (_pmdata._tr && trs.length > 0) {
+            $(".train-b").show();
+        }
+
+        var buss = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 3;
+        });
+        if (_pmdata._bs && buss.length > 0) {
+            $(".bus-b").show();
+        }
+		if (_pmdata._hd) {
+            $(".holidays-b").show();
+        }
+        var crs = $.grep(_lsmdata, function (n, i) {
+            return n.mId === 4;
+        });
+        if (_pmdata._cr && crs.length > 0) {
+            $(".cab-b").show();
+        }
+
+        if (response.isDeactivate) {
+            logoutbcf();
+        }
+        $(".product-b").show();
+        if (document.getElementById("menuaccess") != null && $("#menuaccess").length > 0) {
+            document.getElementById('crpmenu').style.display = 'inline-block';
+            $("#menuaccess").html('');
+            html += "<li><a href=\"" + _pmdata._url + "/Home/Index?searchid=\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/dashboard-ico.svg\"></span>Dashboard</a></li>"
+            html += "<li><a href=\"" + _pmdata._url + "/Dashboard/Index\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/support-ico.svg\"></span>Support</a></li>"
+
+            if (_pmdata._bl) {
+                html += "<li><a href=\"" + _pmdata._url + "/AirBookingList/AirBookingList\" class=\"feat-btn\" target=\"_blank\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/booking-list-ico.svg\"></span>Bookings</a></li>"
+            }
+            var sprs = $.grep(_lsmdata, function (n, i) {
+                return n.mId === 15;
+            });
+
+            if (false && _pmdata._sp && sprs.length > 0) {
+                html += "<li>";
+
+                html += "<a href=\"javascript:void(0)\" id=\"SPS\" class=\"feat-btn\" onclick=\"togglesubmenu(SPS,SSPS);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/bkng-sm.svg\"></span> Support<span class=\"first down_arw_mnu\"></span></a>";
+
+                if (sprs.length > 0) {
+                    html += "<ul id=\"SSPS\" class=\"feat-show cs_bck\">";
+                    $.each(sprs, function (key, val) {
+                        html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                    });
+
+                    html += "</ul>";
+                }
+                html += "</li>";
+            }
+                var bls = $.grep(_lsmdata, function (n, i) {
+                    return n.mId === 8;
+                });
+                if (false && _pmdata._bl && bls.length > 0) {
+                    html += "<li>";
+
+                    html += "<a href=\"javascript:void(0)\" id=\"BL\" class=\"feat-btn\" onclick=\"togglesubmenu(BL,SBL);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/imgnew/bkng-sm.svg\"></span>Booking List <span class=\"first down_arw_mnu\"></span></a>";
+
+                    if (bls.length > 0) {
+                        html += "<ul id=\"SBL\" class=\"feat-show cs_bck\">";
+                        $.each(bls, function (key, val) {
+                            html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                        });
+
+                        html += "</ul>";
+                    }
+
+                    html += "</li>";
+                }
+
+                var adms = $.grep(_lsmdata, function (n, i) {
+                    return n.mId === 6;
+                });
+                if (_pmdata._ad && adms.length > 0) {
+                    html += "<li>";
+
+                    html += "<a href=\"javascript:void(0)\" id=\"ADL\" class=\"feat-btn\" onclick=\"togglesubmenu(ADL,SADL);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/admin-ico.svg\"></span> Admin <span class=\"first down_arw_mnu\"></span></a>";
+
+                    if (adms.length > 0) {
+                        html += "<ul id=\"SADL\" class=\"feat-show cs_bck\">";
+                        $.each(adms, function (key, val) {
+                            html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                        });
+
+                        html += "</ul>";
+                    }
+
+                    html += "</li>";
+                }
+
+                var acs = $.grep(_lsmdata, function (n, i) {
+                    return n.mId === 9;
+                });
+                if (_pmdata._as && acs.length > 0) {
+                    html += "<li>";
+
+                    html += "<a href=\"javascript:void(0)\" id=\"AC\" class=\"feat-btn\" onclick=\"togglesubmenu(AC,SAC);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/finance-ico.svg\"></span> Finance <span class=\"first down_arw_mnu\"></span></a>";
+
+                    if (acs.length > 0) {
+                        html += "<ul id=\"SAC\" class=\"feat-show cs_bck\">";
+                        $.each(acs, function (key, val) {
+                            //if (val.name.toUpperCase() != "GST") {
+                                html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                            //}
+                        });
+
+                        html += "</ul>";
+                    }
+                    html += "</li>";
+                }
+                var rps = $.grep(_lsmdata, function (n, i) {
+                    return n.mId === 7;
+                });
+                if (_pmdata._rs && rps.length > 0) {
+                    html += "<li>";
+
+                    html += "<a href=\"javascript:void(0)\" id=\"RPSC\" class=\"feat-btn\" onclick=\"togglesubmenu(RPSC,SRPSC);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/reports-ico.svg\"></span> Reports <span class=\"first down_arw_mnu\"></span></a>";
+                    if (rps.length > 0) {
+                        html += "<ul id=\"SRPSC\" class=\"feat-show cs_bck\">";
+                        $.each(rps, function (key, val) {
+
+                            html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                        });
+
+                        html += "</ul>";
+                    }
+                    html += "</li>";
+                }
+
+
+                var qrys = $.grep(_lsmdata, function (n, i) {
+                    return n.mId === 11;
+                });
+                if (_pmdata._qy && qrys.length > 0) {
+                    html += "<li>";
+
+                    html += "<a href=\"javascript:void(0)\" id=\"QDL\" class=\"feat-btn\" onclick=\"togglesubmenu(QDL,SQADL);\"><span class=\"sm_mage\"></span>Query <span class=\"first down_arw_mnu\"></span></a>";
+                    if (qrys.length > 0) {
+                        html += "<ul id=\"SQADL\" class=\"feat-show cs_bck\">";
+                        $.each(qrys, function (key, val) {
+
+                            html += "<li><a href=\"" + ((val.url != null && val.url != "") ? val.url : val.oldUrl) + "\" target=\"_blank\">" + val.name + "</a></li>";
+                        });
+
+                        html += "</ul>";
+                    }
+                    html += "</li>";
+                }
+                if (_pmdata._lq) {
+                    html += "<li>";
+
+                    html += "<a href=\"javascript:void(0)\" id=\"LQ\" class=\"feat-btn\" onclick=\"togglesubmenu(LQ,SLQ);\"><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/leads-ico.svg\"></span>Lead <span class=\"first down_arw_mnu\"></span></a>";
+                    html += "<ul class=\"feat-show cs_bck\" id=\"SLQ\">";
+                    html += "<li>";
+                    html += "<a href=\"javascript:void(0)\" id=\"MSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(MSLQ,SSLQ);\">Manage My Leads <span class=\"third  down_arw_mnu\"></span></a>";
+
+                    html += "<ul class=\"serv-show2\" id=\"SSLQ\">";
+                    html += "<li><a href=\"" + _pmdata._url + "/NewQuery/NewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+                    html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadUnAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Unassigned List</a></li>";
+                    html += "<li><a href=\"" + _pmdata._url + "/QueryList/LeadAssignedList?searchid=%3Fsearchid%3D\" target=\"_blank\">Assigned List</a></li>";
+                    html += "<li><a href=\"" + _pmdata._url + "/CloseQuery/CustomerAcceptancePendingList?searchid=%3Fsearchid%3D\" target=\"_blank\">Close Query</a></li>";
+                    html += "</ul>";
+                    html += "<a href=\"javascript:void(0)\" id=\"BBSLQ\" class=\"serv-btn2\" onclick=\"togglesubsubmenu(BBSLQ,BSSLQ);\">Buy & Sell Leads <span class=\"third  down_arw_mnu\"></span></a>";
+                    html += "<ul class=\"serv-show2\" id=\"BSSLQ\">";
+                    html += "<li><a href=\"" + _pmdata._url + "/NewQuery/BuySellNewQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">New Query</a></li>";
+                    html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/BuyQuery?searchid=%3Fsearchid%3D\" target=\"_blank\">Buy Query</a></li>";
+                    html += "<li><a href=\"" + _pmdata._url + "/BuySellMarketPlace/SellList?searchid=%3Fsearchid%3D\" target=\"_blank\">Sell List</a></li>";
+                    html += "</ul>";
+                    html += "</li>";
+                    html += "</ul>";
+                    html += "</li>";
+
+                }
+                html += "<li><a onclick=\"logoutbcf();\" href=\"javascript:void(0)\" class=\"feat-btn\" ><span class=\"sm_mage\"><img src=\"https://www.easemytrip.com/agents/Content/assets/dist/img/logout.svg\"></span>Sign Out</a></li>"
+                $("#menuaccess").append(html);
+            }
+        
+
+    }catch(ex){}
+}
+
+function logoutbcf() {
+    try{
+        if(redictTologin!=null && redictTologin!=""){
+            deletemcookie("XFFGHTYUOP@#$");
+            deletemcookie("XFFGHTYUOP@#$NL");
+            window.location.href=redictTologin;
+        }
+    }catch(ex){}
+}
+
+function deletemcookie(name) {
+    var endDomain = "";
+    if (window.location.host.split('.').length > 3) {
+        endDomain = "." + window.location.host.split('.')[3];
+    }
+    var domain = "." + window.location.host.split('.')[1] + "." + window.location.host.split('.')[2] + endDomain;
+    document.cookie = name + '=;domain=' + domain + '; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+	
+	function getBCFBooking() {
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "/Login/getBcfBookings",
+        data: "{'userData':'" + $("#hdnCorpComp").val() + "'}",
+        success: function (response) {
+            if (response != null && response != "") {
+               $("#ptotalbs").text(response.split('|')[0]);
+			   $("#ptcb").text(response.split('|')[1]);
+			   $("#pttub").text(response.split('|')[2]);
+			   $("#pttrb").text(response.split('|')[3]);
+            }
+        },
+        error: function (jqXHR, exception) {
+            console.log(jqXHR);
+        }
+    });
+}

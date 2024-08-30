@@ -1,0 +1,642 @@
+
+function SigninController(e, t) {
+	console.log("SigninController");
+    e.BaseUrl = "https://www.easemytrip.com/", e.IsMobile = !1, e.UserID = "", e.validateUser = function(t) {
+        var n = t.target.value;
+        n.length > 2 && isFinite(n) && /^[0-9]+$/.test(n) && n.length <11 ? e.IsMobile = !0 : e.IsMobile = !1, n.length < 2 ? (document.getElementById("shwotp").style.backgroundColor = "rgba(0,0,0,.25)", document.getElementById("shwotp").disabled = !0) : document.getElementById("shwotp").style.backgroundColor = "", document.getElementById("shwotp").disabled = !1;
+        e.UserID
+    }, e.validateOtp = function (s, ids, cls) {
+        s.target.value = s.target.value.replace(/[^0-9]/g, "")
+        if (s.target.value != null && s.target.value != "") {
+            var idNum = s.target.id.replace(ids, '')
+            if (parseInt(idNum) <= 4) {
+                $("#" + ids + parseInt(parseInt(idNum) + 1)).focus();
+            }
+            e.OTP = ""; e.FpOTP = "";
+            if ($("." + cls).length > 0) {
+                for (var i = 0; i < $("." + cls).length; i++) {
+                    if ($("#" + ids + i).val() != "") {
+                        if (ids == 'txtOTP') {
+                            e.OTP += $("#" + ids + i).val();
+                        } else if (ids == 'txtFPOTP') {
+                            e.FpOTP += $("#" + ids + i).val();
+                        }
+                    }
+                }
+                //$("#txtEmail1").val(e.OTP);
+            }
+            //e.FetchOTP("Login");
+        }
+    }, e.IsNum = function (e) {
+        return /^[0-9]+$/.test(e)
+    }, e.addContact = function() {
+        e.contacts.push({
+            type: "email",
+            value: "yourname@example.org"
+        })
+    }, e.removeContact = function(t) {
+        var n = e.contacts.indexOf(t);
+        e.contacts.splice(n, 1)
+    }, e.ValidateLogin = function(e) {
+        e.type = "phone", e.value = ""
+    }, e.ValidateEmail = function(e) {
+        return new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/).test(e)
+    }, e.Token = "";
+    var n, i = 60;
+    e.CheckUser = function(o) {
+		$("#OTPsent").hide();
+        if ($("#RegValid").hide(), $("#RegValidPhone").hide(), $("#RegValidEmPh").hide(), null == e.UserID || "" == e.UserID) return $("#RegValidEmPh").fadeIn(), $("#RegValidEmPh").fadeOut(5e3), !1;
+        if (isFinite(e.UserID) && ($(".ctycode").html()=='91' || $(".ctycode").html()=='+91') && 10!=e.UserID.length && e.IsMobile)
+			return $("#RegValidPhone").fadeIn(), $("#RegValidPhone").fadeOut(5e3), !1;
+		if (isFinite(e.UserID) && ($(".ctycode").html()=='971' || $(".ctycode").html()=='+971') && 9!=e.UserID.length && e.IsMobile)
+			return $("#RegValidPhone").fadeIn(), $("#RegValidPhone").fadeOut(5e3), !1;
+		if (isFinite(e.UserID) && ($(".ctycode").html()=='44' || $(".ctycode").html()=='+44') && 10!=e.UserID.length && e.IsMobile)
+			return $("#RegValidPhone").fadeIn(), $("#RegValidPhone").fadeOut(5e3), !1;
+		if (isFinite(e.UserID) && ($(".ctycode").html()=='66' || $(".ctycode").html()=='+66') && e.UserID.length<7 && e.IsMobile)
+			return $("#RegValidPhone").fadeIn(), $("#RegValidPhone").fadeOut(5e3), !1;
+		
+        if (!e.ValidateEmail(e.UserID) && !e.IsMobile) return $("#RegValidEmail").fadeIn(), $("#RegValidEmail").fadeOut(5e3), !1;
+        e.UTY = e.IsMobile ? "Mobile" : "Email", e.cc = $(".ctycode").html(), "Resend" == o && e.IsMobile ? ($("#otpRsnd").hide(), $("#spnClock").show(), i = 60, n = setInterval(function() {
+            ! function() {
+                0 == --i && (clearInterval(n), $("#ooc").show(), $("#spnClock").hide());
+			if( document.getElementById("spnClock")!=null){
+				document.getElementById("spnClock").innerHTML = "00:" + i
+			}		
+			  
+            }()
+        }, 1e3)) : ($("#otpRsnd").show(), $("#spnClock").hide(), clearInterval(n)), "Resend" == o && ($("#OTPsent").show(), $(".login-OTP").val(''));
+        var a = {};
+        a.UID = s(e.UserID), a.CC = e.cc, a.ATY = o, a.UTY = s(e.UTY), p(), a.IP = s(u);
+        var l = $("#hdnInputToken").val();
+        if (null != l && "" != l) {
+            a.VerifyToken = l;
+            var g = c(JSON.stringify(a)),
+                m = {};
+            m.request = g, t({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    useridentity: s(e.UserID + "|" + u + "|" + e.UTY),
+                    withCredentials: !0
+                },
+                url: "https://loginuser.easemytrip.com/api/Login/VerifyUserLogin",
+                data: JSON.stringify(m)
+            }).then(function(t) {
+                if (t.data = d(t.data), $("#hdnInputToken").val(""), t.data = JSON.parse(t.data), null != t && null != t.data) {
+                    if ($("#lgnBox").hide(), $("#otpBox").show(), null != t.data.Priority && "" != t.data.Priority) {
+                        var n = t.data.Priority.split("|");
+                        e.Token = t.data.Token, e.firstpriority = n[0], e.SecondPrioerity = n[1]
+                    }
+                    if (e.ActionButton = t.data.Action, e.DM = null != t.data.Message && "" != t.data.Message ? t.data.Message : "Enter OTP", null != n && "Password" == n[0]) $("#otpBox").hide(), $("#lgnBox").hide(), $("#emailgnBox").show(), "OTP" == n[1] && (document.getElementById("OtpLgnBtn").disabled = !1);
+                    else if (null != n && "OTP" == n[0] && "OTP" == n[0]) "Password" == n[1] ? $("#shwlgnbx").show() : $("#shwlgnbx").hide(), $("#emailgnBox").hide(), t.data.FailCount > 10 ? document.getElementById("OtpLgnBtn").disabled = !0 : document.getElementById("OtpLgnBtn").disabled = !1;
+                    else {
+                        if ("Resend Limit Exceed. Please try after some time" == t.data.Messg) return $("#RegErrorMsg").html("").html(t.data.Messg), $("#RegErrorMsg").fadeIn(), $("#RegErrorMsg").fadeOut(1e4), !1;
+                        $("#otpBox").show(), $("#emailgnBox").hide(), $("#lgnBox").hide(), t.data.FailCount > 10 ? document.getElementById("OtpLgnBtn").disabled = !0 : document.getElementById("OtpLgnBtn").disabled = !1, "Create My Account" == e.ActionButton ? $("#shwlgnbx").hide() : $("#shwlgnbx").show()
+                    }
+                }
+            }, function(e) {
+                alert("error")
+            })
+        } else grecaptcha.enterprise.execute("6LeqSKkcAAAAALWU11XjmIIQqT76zFT97OcfqSNR", {
+            action: "login"
+        }).then(function(n) {
+            $("#hdnInputToken").val(""), a.Token = n;
+            var i = c(JSON.stringify(a)),
+                o = {};
+            o.request = i, t({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    useridentity: r(e.UserID + "|" + u + "|" + e.UTY),
+                    withCredentials: !0
+                },
+                url: "https://loginuser.easemytrip.com/api/Login/VerifyUserLogin",
+                data: JSON.stringify(o)
+            }).then(function(t) {
+                if (t.data = d(t.data), t.data = JSON.parse(t.data), null != t && null != t.data) {
+                    if (1 == t.data.IsStatus) return $("#captchareder").show(), !1;
+                    if (e.ActionButton = t.data.Action, null != t.data.Priority && "" != t.data.Priority) {
+                        var n = t.data.Priority.split("|");
+                        e.Token = t.data.Token, e.firstpriority = n[0], e.SecondPrioerity = n[1]
+                    }
+                    if (e.DM = null != t.data.Message && "" != t.data.Message ? t.data.Message : "Enter OTP", null != n && "Password" == n[0]) $("#otpBox").hide(), $("#lgnBox").hide(), $("#emailgnBox").show(), "OTP" == n[1] && (document.getElementById("OtpLgnBtn").disabled = !1);
+                    else if (null != n && "OTP" == n[0] && "OTP" == n[0]) $("#lgnBox").hide(), $("#otpBox").show(), "Password" == n[1] ? $("#shwlgnbx").show() : $("#shwlgnbx").hide(), $("#emailgnBox").hide(), t.data.FailCount > 10 ? document.getElementById("OtpLgnBtn").disabled = !0 : document.getElementById("OtpLgnBtn").disabled = !1;
+                    else {
+                        if ("Resend Limit Exceed. Please try after some time" == t.data.Messg) return $("#RegErrorMsg").html("").html(t.data.Messg), $("#RegErrorMsg").fadeIn(), $("#RegErrorMsg").fadeOut(1e4), !1;
+                        $("#otpBox").show(), $("#emailgnBox").hide(), $("#lgnBox").hide(), t.data.FailCount > 10 ? document.getElementById("OtpLgnBtn").disabled = !0 : document.getElementById("OtpLgnBtn").disabled = !1, "Create My Account" == e.ActionButton ? $("#shwlgnbx").hide() : $("#shwlgnbx").show()
+                    }
+                }
+            }, function(e) {
+                alert("error")
+            })
+        })
+    };
+    var o = "EMTmVUvDhT9aWsVG",
+        a = "MT$1VU8DHQ8aWLVH",
+        l = "TMTOO1vDhT9aWsV1";
+
+    function d(e) {
+        var t = CryptoJS.enc.Utf8.parse(l),
+            n = CryptoJS.enc.Utf8.parse(l);
+        return CryptoJS.AES.decrypt(e, t, {
+            keySize: 16,
+            iv: n,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString(CryptoJS.enc.Utf8)
+    }
+
+    function r(e) {
+        console.log(e);
+        var t = CryptoJS.enc.Utf8.parse(m),
+            n = CryptoJS.enc.Utf8.parse(m);
+        return CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(e), t, {
+            keySize: 16,
+            iv: n,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString()
+    }
+
+    function s(e) {
+        console.log(e);
+        var t = CryptoJS.enc.Utf8.parse(o),
+            n = CryptoJS.enc.Utf8.parse(o);
+        return CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(e), t, {
+            keySize: 16,
+            iv: n,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString()
+    }
+
+    function c(e) {
+        console.log(e);
+        var t = CryptoJS.enc.Utf8.parse(a),
+            n = CryptoJS.enc.Utf8.parse(a);
+        return CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(e), t, {
+            keySize: 16,
+            iv: n,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString()
+    }
+    var u = "";
+
+    function p() {
+        var e;
+        try {
+            $.ajax({
+                async: !1,
+                type: "GET",
+                url: "https://getip.easemytrip.com/UserIP.svc/GetIP",
+                success: function(t) {
+                    e = t.documentElement.innerHTML, u = e,
+                        function(e, t, n) {
+                            var i = new Date;
+                            i.setTime(i.getTime() + 24 * n * 60 * 60 * 1e3);
+                            var o = "expires=" + i.toUTCString();
+                            document.cookie = e + "=" + t + ";" + o + ";path=/;domain=.easemytrip.com"
+                        }("UserIP", e, 25)
+                }
+            })
+        } catch (e) {}
+        return e
+    }
+
+    function g(e) {
+		var _result =window.location.host;
+	  _result=_result.replace("www.","").replace("hotels.","");
+        document.cookie = e + "=;domain=."+_result+"; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+		
+		if(window.location.host.toLowerCase()=='csc.easemytrip.com'){
+            document.cookie = e + "=;domain=.easemytrip.com; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+        }
+    }
+    e.Authenticate = function(n) {
+		$("#ValidOtp").hide();
+		$("#ValidPass").hide();
+		$("#OTPsent").hide();
+        if ($("#RegValid").hide(), $("#RegValid").hide(), e.Rcode = "", e.Rurl = "", e.UTY = e.IsMobile ? "Mobile" : "Email", e.AccPassword = "P" == n ? e.Password : e.OTP, e.cc = $(".ctycode").html(), null == e.UserID || "" == e.UserID) return alert("Please enter mobile or Email!!!"), !1;
+      //  if (isFinite(e.UserID) && 10 != e.UserID.length) 
+		//	return alert("Please enter mobile or Email!!!"), !1;
+		
+		 if (isFinite(e.UserID) && ($(".ctycode").html()=='91' || $(".ctycode").html()=='+91') && 10!=e.UserID.length)
+			return alert("Please enter mobile or Email!!!"), !1;
+		if (isFinite(e.UserID) && ($(".ctycode").html()=='971' || $(".ctycode").html()=='+971') && 9!=e.UserID.length )
+			return alert("Please enter mobile or Email!!!"), !1;
+		if (isFinite(e.UserID) && ($(".ctycode").html()=='44' || $(".ctycode").html()=='+44') && 10!=e.UserID.length)
+			return alert("Please enter mobile or Email!!!"), !1;
+		if (isFinite(e.UserID) && ($(".ctycode").html()=='66' || $(".ctycode").html()=='+66') && e.UserID.length<7)
+			return alert("Please enter mobile or Email!!!"), !1;
+		
+		
+		
+        if (!e.ValidateEmail(e.UserID) && !isFinite(e.UserID)) return alert("Please enter mobile or Email!!!"), !1;
+        if ((null == e.OTP || "" == e.OTP) && "O" == n) return $("#ValidOtp").show(),$('.login-OTP').val(''), !1;
+		if ((null == e.Password || "" == e.Password) && "P" == n) return $("#ValidPass").show(), !1;
+        
+        "P" == e.AccPassword && (e.cc = ""), $("#lgnBox").hide();
+        var i = e.GetCookie("SignUpInfoRefralCode").split("|");
+        i.length > 1 && (e.Rcode = i[0].trim(), e.Rurl = i[1].trim());
+        var o = {};
+        o.UID = s(e.UserID), o.CC = e.cc, o.TKN = s(e.Token), o.ATY = "Login", o.UTY = s(e.UTY), o.Pass = s(e.AccPassword), o.PTY = n, o.UA = "", o.RefCd = e.Rcode, o.RefLnk = e.Rurl, p(), o.IP = s(u);
+        var a = $("#hdnInputToken").val();
+        if (null != a && "" != a) {
+            o.VerifyToken = a, o.Token = "";
+            var l = c(JSON.stringify(o)),
+                r = {};
+            r.request = l, t({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    useridentity: s(e.UserID + "|" + u + "|" + e.UTY),
+                    withCredentials: !0
+                },
+                url: "https://loginuser.easemytrip.com/api/Login/AuthenticateLoginUser",
+                data: JSON.stringify(r)
+            }).then(function(t) {
+                if (t.data = d(t.data), t.data = JSON.parse(t.data), null != t && null != t.data) {
+                    if (1 == t.data.IsStatus) return $("#captchareder").show(), !1;
+                    e.Password = "", e.OTP = "", null != t ? e.DivSelector(t.data, n) : alert("invalid OTP!!")
+                }
+            }, function(e) {
+                alert("error")
+            })
+        } else grecaptcha.enterprise.execute("6LeqSKkcAAAAALWU11XjmIIQqT76zFT97OcfqSNR", {
+            action: "login"
+        }).then(function(i) {
+            o.Token = i, $("#hdnInputToken").val("");
+            var a = c(JSON.stringify(o)),
+                l = {};
+            l.request = a, t({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    useridentity: s(e.UserID + "|" + u + "|" + e.UTY),
+                    withCredentials: !0
+                },
+                url: "https://loginuser.easemytrip.com/api/Login/AuthenticateLoginUser",
+                data: JSON.stringify(l)
+            }).then(function(t) {
+                if (t.data = d(t.data), t.data = JSON.parse(t.data), null != t && null != t.data) {
+                    if (1 == t.data.IsStatus) return $("#captchareder").show(), !1;
+                    e.Password = "", e.OTP = "", null != t ? e.DivSelector(t.data, n) : alert("invalid OTP!!")
+                }
+            }, function(e) {
+                alert("error")
+            })
+        })
+    }, e.DivSelector = function(t, n) {
+        if (t.Status) e.CreateLCookie("XFFGHTYUOP@#$", t.CookC, 365), e.CreateLCookie("XFFGHTYUOP@#$NL", t.CookM, 365),e.Reload()
+		, e.PrintUserDtl(t, "N");
+        else if ("P" == n) $("#ValidPass").fadeIn(), $("#ValidPass").fadeOut(4e3);
+        else {
+            $("#ValidOtp").fadeIn(), $("#ValidOtp").fadeOut(3e3),$('.login-OTP').val('');
+            null != t.FailCount && (5 == t.FailCount ? ($("#AttemptWar").fadeIn(), $("#AttemptWar").fadeOut(5e3)) : t.FailCount >= 10 && t.OtpExpMin > 0 && (document.getElementById("OtpLgnBtn").disabled = !0, $("#shwlgnOTP").hide(), !0, e.OptLoginExpiry(t.OtpExpMin), t.IsVerified ? ($("#OtpAttemptBlk").text("Reached maximum limit. Login with password or try after sometime!"), $("#OtpAttemptBlk").show()) : ($("#OtpAttemptBlk").text("Reached maximum limit. Login with OTP after sometime!"), $("#OtpAttemptBlk").show())))
+        }
+    },
+	e.Reload=function(){
+		if(window.location.href.split('?')[0].toUpperCase()=='HTTPS://WWW.EASEMYTRIP.COM/LOGINEMTPRO.HTML'){
+window.location.href="https://www.easemytrip.com"
+
+}
+else if(window.location.href.toLowerCase().indexOf("hotels/") > -1 || window.location.href.toLowerCase().indexOf("hotels/") > -1)
+				{
+					location.reload();					
+				}
+else{
+	//window.location.reload();
+	e.CheckLogin();
+}
+		
+	}
+	, e.CreateLCookie = function(e, t, n) {
+        if (n) {
+            var i = new Date;
+            i.setTime(i.getTime() + 24 * n * 60 * 60 * 1e3);
+            i.toGMTString()
+        } else;
+        //document.cookie = e + "=" + t + ";domain=.easemytrip.com;path=/"
+		var domainname=window.location.host;
+        document.cookie = e + "=" + t + ";domain="+domainname.replace("www","")+";path=/";
+    }, e.CheckUserFP = function() {
+        if (null == e.FPUserId || "" == e.FPUserId) return $("#FpValidEmPh").fadeIn(), $("#FpValidEmPh").fadeOut(4e3), !1;
+        if (isFinite(e.FPUserId) && 10 != e.FPUserId.length && e.IsMobile) return $("#FpValidPhone").fadeIn(), $("#FpValidPhone").fadeOut(3e3), !1;
+        if (!e.ValidateEmail(e.FPUserId) && !e.IsMobile) return $("#FpValidEmail").fadeIn(), $("#FpValidEmail").fadeOut(3e3), !1;
+        e.UTY = e.IsMobile ? "Mobile" : "Email";
+        var n = {};
+        n.UID = s(e.FPUserId), n.CC = e.cc, n.ATY = "ChangePassword", n.UTY = s(e.UTY), p(), n.IP = s(u);
+        var i = $("#hdnInputToken").val();
+        if (null != i && "" != i) {
+            n.VerifyToken = i;
+            var o = c(JSON.stringify(n)),
+                a = {};
+            a.request = o, t({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    useridentity: s(e.FPUserId + "|" + u + "|" + e.UTY),
+                    withCredentials: !0
+                },
+                url: "https://loginuser.easemytrip.com/api/Login/VerifyUserLogin",
+                data: JSON.stringify(a)
+            }).then(function(t) {
+                t.data = d(t.data), $("#hdnInputToken").val(""), t.data = JSON.parse(t.data), null != t && null != t.data && (t.data.Status ? (e.Token = t.data.Token, $("#forgetpdBox").hide(), $("#shwFpo").show()) : $("#ntRegAlr").show())
+            }, function(e) {
+                alert("error")
+            })
+        } else grecaptcha.enterprise.execute("6LeqSKkcAAAAALWU11XjmIIQqT76zFT97OcfqSNR", {
+            action: "login"
+        }).then(function(i) {
+            $("#hdnInputToken").val(""), n.Token = i;
+            var o = c(JSON.stringify(n)),
+                a = {};
+            a.request = o, t({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    useridentity: r(e.FPUserId + "|" + u + "|" + e.UTY),
+                    withCredentials: !0
+                },
+                url: "https://loginuser.easemytrip.com/api/Login/VerifyUserLogin",
+                data: JSON.stringify(a)
+            }).then(function(t) {
+                t.data = d(t.data), t.data = JSON.parse(t.data), null != t && null != t.data && (t.data.Status ? (e.Token = t.data.Token, $("#forgetpdBox").hide(), $("#shwFpo").show()) : $("#ntRegAlr").show())
+            }, function(e) {
+                alert("error")
+            })
+        })
+    }, e.VerifyOtpFP = function() {
+		$("#FpValidOtp").hide();
+		$("#FpValidPass").hide();
+        if (e.UTY = e.IsMobile ? "Mobile" : "Email", null == e.FPUserId || "" == e.FPUserId) return alert("Please enter mobile or Email!!!"), !1;
+        if (isFinite(e.FPUserId) && 10 != e.FPUserId.length) return alert("Please enter mobile or Email!!!"), !1;
+        if (!e.ValidateEmail(e.FPUserId) && !isFinite(e.FPUserId)) return alert("Please enter mobile or Email!!!"), !1;
+        //if (null == e.FpOTP || "" == e.FpOTP) return $("#FpValidOtp").fadeIn(), $("#FpValidOtp").fadeOut(4e3), !1;
+		if (null == e.FpOTP || "" == e.FpOTP) return $("#FpValidOtp").show(),!1;
+		//if (null == e.NewPassword || "" == e.NewPassword) return $("#FpValidPass").fadeIn(), $("#FpValidPass").fadeOut(4e3), !1;
+		if (null == e.NewPassword || "" == e.NewPassword) return $("#FpValidPass").show(),!1;
+        
+        e.cc = $(".ctycode").html();
+        var n = {};
+        n.UID = s(e.FPUserId), n.CC = e.CC, n.TKN = s(e.Token), n.ATY = "ChangePassword", n.UTY = s(e.UTY), n.Pass = s(e.FpOTP), n.NewPassword = s(e.NewPassword), n.PTY = "OTP", n.UA = "", p(), n.IP = s(u);
+        var i = $("#hdnInputToken").val();
+        if (null != i && "" != i) {
+            n.VerifyToken = i, n.Token = token;
+            var o = c(JSON.stringify(n)),
+                a = {};
+            a.request = o, t({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    useridentity: s(e.FPUserId + "|" + u + "|" + e.UTY),
+                    withCredentials: !0
+                },
+                url: "https://loginuser.easemytrip.com/api/Login/AuthenticateLoginUser",
+                data: JSON.stringify(a)
+            }).then(function(t) {
+                if (t.data = d(t.data), t.data = JSON.parse(t.data), null != t)
+                    if (t.data.Status) alert("Password changed"), $("#shwFpo").hide(), $("#lgnBox").show(), $("#mainlogin").show();
+                    else {
+                        var n = !1;
+                        null != t.data.FailCount && (5 == t.data.FailCount ? alert("YOu have done 5 attempts !!!!!. Try login in with password!!!") : t.data.FailCount >= 10 && t.data.OtploginExpMin > 0 && ($("#OtpLgnBtn").hide(), $("#shwlgnOTP").hide(), $("#otpBox").hide(), $("#emailgnBox").show(), n = !0, e.OptLoginExpiry(t.data.OtpExpMin), alert("reached maximum limit . login with password of try after sometie!!!!"))), n ? ($("#otpBox").hide(), $("#emailgnBox").show(), e.OptLoginExpiry(t.data.OtpExpMin)) : alert("invalid OTP!!!!")
+                    }
+            }, function(e) {
+                alert("error")
+            })
+        } else grecaptcha.enterprise.execute("6LeqSKkcAAAAALWU11XjmIIQqT76zFT97OcfqSNR", {
+            action: "login"
+        }).then(function(i) {
+            n.Token = i, $("#hdnInputToken").val("");
+            var o = c(JSON.stringify(n)),
+                a = {};
+            a.request = o, t({
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    useridentity: s(e.FPUserId + "|" + u + "|" + e.UTY),
+                    withCredentials: !0
+                },
+                url: "https://loginuser.easemytrip.com/api/Login/AuthenticateLoginUser",
+                data: JSON.stringify(a)
+            }).then(function(t) {
+                if (t.data = d(t.data), t.data = JSON.parse(t.data), null != t)
+                    if (t.data.Status) alert("Password changed"), $("#shwFpo").hide(), $("#lgnBox").show(), $("#mainlogin").show();
+                    else {
+                        var n = !1;
+                        null != t.data.FailCount && (5 == t.data.FailCount ? alert("YOu have done 5 attempts !!!!!. Try login in with password!!!") : t.data.FailCount >= 10 && t.data.OtploginExpMin > 0 && ($("#OtpLgnBtn").hide(), $("#shwlgnOTP").hide(), $("#otpBox").hide(), $("#emailgnBox").show(), n = !0, e.OptLoginExpiry(t.data.OtpExpMin), alert("reached maximum limit . login with password of try after sometie!!!!"))), n ? ($("#otpBox").hide(), $("#emailgnBox").show(), e.OptLoginExpiry(t.data.OtpExpMin)) : alert("invalid OTP!!!!")
+                    }
+            }, function(e) {
+                alert("error")
+            })
+        })
+    };
+    var m = "EMTmVUvDhT9aWsVG";
+
+    function h() {
+        document.getElementById("OtpLgnBtn").disabled = !1, $("#shwlgnOTP").show()
+    }
+    e.OOC = function() {
+        t({
+            method: "POST",
+            url: e.BaseUrl + "api/SignIn/OOC",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: "{'Mobile':'" + e.UserID + "'}"
+        }).then(function(e) {
+            $("#otpCall").fadeIn(), $("#otpCall").fadeOut(4e3), null != e && null != e.data && e.data.Status
+        }, function(e) {
+            alert("error")
+        })
+    }, e.GetCookie = function(e) {
+        for (var t = e + "=", n = document.cookie.split(";"), i = 0; i < n.length; i++) {
+            for (var o = n[i];
+                " " == o.charAt(0);) o = o.substring(1);
+            if (0 == o.indexOf(t)) return o.substring(t.length, o.length)
+        }
+        return ""
+    }, e.CheckLogin = function() {
+        var n = e.GetCookie("XFFGHTYUOP@#$"),
+            i = e.GetCookie("XFFGHTYUOP@#$NL");
+        if ("" == i) return !1;
+        var o = "../api/SignIn/CheckSignIn";
+	
+        (window.location.host.indexOf("flight.easemytrip.")<0 || window.location.href.toLowerCase().indexOf("hotels/") > -1 || window.location.href.toLowerCase().indexOf("hotels/") > -1) && (o = "../SignIn/CheckSignIn"), t({
+            method: "POST",
+            url: o,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: "{'AuthO':'" + n + "','AuthM':'" + i + "'}"
+        }).then(function(t) {
+            null != t && null != t.data && t.data.Status && e.PrintUserDtl(t.data, "N")
+        }, function(e) {})
+    }, e.CheckLogin(), e.PrintUserDtl = function(e, t) {
+        var n = "";
+        if (null != e) {
+            if (null != document.getElementById("welcome-det-User")) {
+				
+				
+				
+				if(e.Name==" ")
+				{
+					e.Name=e.UID;
+				}
+                null != document.getElementById("spnLgnWelcome") && (document.getElementById("spnLgnWelcome").style.display = "inline-block"), document.getElementById("welcome-det-User").style.display = "inline-block", "" != e.Name ? document.getElementById("welcome-det-User").innerHTML = e.Name : "" != e.UID && (n = e.UID, document.getElementById("welcome-det-User").innerHTML = e.UID);
+                try {
+                    PushChatBotLoginEvent("login")
+                } catch (e) {}
+            }
+            null != document.getElementById("divMobProfile") && (document.getElementById("divMobProfile").style.display = "block", document.getElementById("divSignProfile").style.display = "none", document.getElementById("divMobLogout").style.display = "block", document.getElementById("divMobMyProfile").style.display = "block", e.UID, document.getElementById("divMobWelName").innerHTML = e.UID), null != document.getElementById("spnLogoutPnl") && (document.getElementById("spnLogoutPnl").style.display = "block"), null != document.getElementById("divSignInPnl") && (document.getElementById("divSignInPnl").style.display = "none"), null != document.getElementById("spnMyAcc") && (document.getElementById("spnMyAcc").style.display = "none"), null != document.getElementById("welcome-det") && (document.getElementById("welcome-det").style.display = "none"), null != document.getElementById("SigninDtl") && (document.getElementById("SigninDtl").style.display = "block", $(".sign-abs").show()), null != document.getElementById("hid") && (document.getElementById("hid").style.display = "none"), null != document.getElementById("mainlogin") && (document.getElementById("mainlogin").style.display = "none")
+        } else null != document.getElementById("spnLgnWelcome") && (document.getElementById("spnLgnWelcome").style.display = "none"), null != document.getElementById("spnLogoutPnl") && (document.getElementById("spnLogoutPnl").style.display = "none"), null != document.getElementById("spnMyAcc") && (document.getElementById("spnMyAcc").style.display = "inline"), null != document.getElementById("divSignInPnl") && (document.getElementById("divSignInPnl").style.display = "block"), null != document.getElementById("welcome-det-User") && (document.getElementById("welcome-det-User").innerHTML = ""), null != document.getElementById("welcome-det") && (document.getElementById("welcome-det").style.display = "block"), null != document.getElementById("RegInHome") && (document.getElementById("RegInHome").style.display = "block"), null != document.getElementById("SigninDtl") && ($(".sign-abs").hide(), document.getElementById("SigninDtl").style.display = "none"), document.getElementById("hid"), "Y" == t && null != document.getElementById("divWrngPass") && (document.getElementById("divWrngPass").style.display = "block"), null != document.getElementById("divMobProfile") && (document.getElementById("divMobProfile").style.display = "none", document.getElementById("divSignProfile").style.display = "block", document.getElementById("divMobLogout").style.display = "none", document.getElementById("divMobMyProfile").style.display = "none");
+        try {
+            window.criteo_q = window.criteo_q || [], window.criteo_q.push({
+                event: "setAccount",
+                account: 49663
+            }, {
+                event: "setEmail",
+                email: n
+            }, {
+                event: "setSiteType",
+                type: "d"
+            }, {
+                event: "viewHome"
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }, e.LogOut13 = function() {
+        g("XFFGHTYUOP@#$"), g("XFFGHTYUOP@#$NL");
+        try {
+            localStorage.setItem("trvlEmail", "")
+        } catch (e) {}
+        window.location.reload()
+    },e.LogOut = function () {
+        g("XFFGHTYUOP@#$"), g("XFFGHTYUOP@#$NL");
+        try {
+            localStorage.setItem("trvlEmail", "")
+        } catch (e) { }
+        try {
+			
+			if(redictTologin!=null && redictTologin!='')
+			{
+				window.location.href = redictTologin;
+			}			
+        else    if (appType == undefined || appType == null || appType == "" || appType.toLowerCase() == "b2c") {
+                window.location.reload();
+            }
+            else {
+                window.location.href = bcfurlConfig[appType.toUpperCase()];
+            }
+        } catch (ex) {
+            window.location.reload();
+        }
+    }, e.OptLoginExpiry = function(e) {
+        setTimeout(h, 60 * e * 1e3)
+    }, $("#divLoginOTP").bind("paste", function (s) {
+        // access the clipboard using the api
+        var pastedData = s.originalEvent.clipboardData.getData('text');
+        if ($.isNumeric(pastedData)) {
+            if ($(".login-OTP").length > 0) {
+                e.OTP = "";
+                for (var i = 0; i < $(".login-OTP").length; i++) {
+                    var text = pastedData.slice(i, (i + 1));//.substr((i+1), i);
+                    try {
+                        if (text != undefined && text != null && text != "") {
+                            $("#txtOTP" + i).val(text);
+                            e.OTP += text;
+                        }
+                    } catch (ex) { }
+                }
+            }
+        }
+        //alert(pastedData);
+    }), $("#divResetOTP").bind("paste", function (s) {
+        var pastedData = s.originalEvent.clipboardData.getData('text');
+        if ($.isNumeric(pastedData)) {
+            if ($(".FP-OTP").length > 0) {
+                e.FpOTP = "";
+                for (var i = 0; i < $(".FP-OTP").length; i++) {
+                    var text = pastedData.slice(i, (i + 1));//.substr((i+1), i);
+                    try {
+                        if (text != undefined && text != null && text != "") {
+                            $("#txtFPOTP" + i).val(text);
+                            e.FpOTP += text;
+                        }
+                    } catch (ex) { }
+                }
+            }
+        }
+    })
+		,e.removeOtp = function (event, cls) {     
+     var key = event.keyCode || event.charCode;
+     var inputs = document.querySelectorAll('input.' + cls);
+        if (key == 8) {
+            var indexNum = Array.from(inputs).indexOf(event.target);
+            if (indexNum !== 0) {
+                inputs[indexNum].value = ''; 
+                inputs[indexNum - 1].focus();
+            }
+        }
+ }
+}
+
+
+try{
+	
+(function(apps){
+    "use strict";
+	
+apps.controller("SigninController", ["$scope", "$http", SigninController]), 
+$(document).ready(function() {
+    $("#shwlogn").click(function() {
+        $("#lgnBox").show(), $("#mainlogin").show()
+    }),
+    $("#shwlognOFr").click(function() {
+        $("#lgnBox").show(), $("#mainlogin").show()
+    }), $("#divBCK").click(function() {
+        $("#lgnBox").show(), $("#otpBox").hide()
+    }), $("#divBCK2").click(function() {
+        $("#lgnBox").show(), $("#emailgnBox").hide()
+    }), $("#divBCK3").click(function() {
+        $("#lgnBox").show(), $("#lgnwpsBox").hide()
+    }), $("#divBCK4").click(function() {
+        $("#forgetpdBox").hide(), $("#lgnBox").show()
+    }), $("#divBCK5").click(function() {
+        $("#forgetpdBox").show(), $("#shwFpo").hide()
+    }), $("#emailauth").click(function() {
+        $("#lgnBox").hide(), $("#otpBox").hide(), $("#emailgnBox").show()
+    }), $("#shwfrpbx").click(function() {
+        $("#lgnwpsBox").hide(), $("#forgetpdBox").show()
+    }), $("#shwRstPass").click(function() {
+        $("#emailgnBox").hide(), $("#forgetpdBox").show()
+    }), $("#shwlgnbx").click(function() {
+        $("#otpBox").hide(), $("#emailgnBox").show()
+    }), $("._crosslog").click(function () {
+            $("#mainlogin").hide(), $("#lgnBox").hide(), $("#lgnwpsBox").hide(), $("#otpBox").hide(), $("#emailgnBox").hide(), $("#forgetpdBox").hide(), $("#shwFpo").hide(), $("#captchareder").hide()
+        }),
+	 $(".cr_hp_v1").click(function() {
+        $("#lgnBox").hide(), $("#lgnwpsBox").hide(), $("#otpBox").hide(), $("#emailgnBox").hide(), $("#forgetpdBox").hide(), $("#shwFpo").hide(), $("#captchareder").hide()
+    }),$(".select-countrycode").click(function () {
+        $(".country-listbx").toggle()
+    }), $(".country-listbx .country-list li").click(function () {
+        $(".ctycode").html("+" + $(this).attr("data-dial-code"));
+        if ($(".selected-flag").find('div').attr("class").split(' ').length > 1) {
+            $(".selected-flag").find('div').removeClass($(".selected-flag").find('div').attr("class").split(' ')[1]);
+            $(".selected-flag").find('div').addClass($(this).attr("data-country-code"));
+        }
+        $(".country-listbx").toggle();
+     })
+	
+	// , $(".flag-dropdown").click(function() {
+        // $(".country-listbx").toggle()
+    // })
+});
+
+})(app);
+
+}catch(e){
+	console.log(e);
+}

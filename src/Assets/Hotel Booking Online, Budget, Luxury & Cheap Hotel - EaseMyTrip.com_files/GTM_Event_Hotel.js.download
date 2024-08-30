@@ -1,0 +1,237 @@
+﻿function ViewPage(checkin, checkout) {
+   
+}
+
+function ViewListingPage(checkin, checkout) {
+  
+
+}
+
+function ViewDetailsPage(checkin, checkout, price) {
+   
+}
+
+function ViewPaymentPage(checkin, checkout, price) {
+  
+}
+
+function ConfPage(checkin, checkout, price) {
+   
+}
+
+
+
+
+function hotelSearchEvent(city,cin,cout,totalguest,totalroom,webType)
+{ try {
+	dataLayer.push({
+  event: "search",
+  ecommerce: {
+   search_term: "Hotel",
+ items: [
+       {
+        item_brand: "Hotel ",
+        item_category: city,
+        item_category2: cin,
+        item_category3: cout,
+        item_category4: totalguest,
+        item_category5: totalroom,
+item_list_id: "Hotel",
+item_list_name: "Hotel",
+        item_variant: webType,
+          }
+		  ]
+	}})
+}
+    catch (e) { }
+}
+function listinSearch(city,cin,cout,totalguest,totalroom,webType)
+{ try {
+	dataLayer.push({
+  event: "search",
+  ecommerce: {
+   search_term: "Hotel",
+ items: [
+       {
+        item_brand: "Hotel ",
+        item_category: city,
+        item_category2: cin,
+        item_category3: cout,
+        item_category4: totalguest,
+        item_category5: totalroom,
+item_list_id: "Hotel",
+item_list_name: "Hotel",
+        item_variant: webType,
+          }
+		  ]
+	}})
+}
+    catch (e) { }
+}
+
+function hotelListingEvent(city,cin,cout,totalguest,totalroom,webType)
+{ try {
+	dataLayer.push({
+  event: "view_item_list",
+  ecommerce: {
+   item_list_id: "Hotel",
+item_list_name: "Hotel",
+      items: [
+       {
+        item_brand: "Hotel ",
+        item_category: city,
+        item_category2: cin,
+        item_category3: cout,
+        item_category4: totalguest,
+        item_category5: totalroom,
+item_list_id: "Hotel",
+item_list_name: "Hotel",
+        item_variant: webType,
+          }
+		  ]
+	}})
+}
+    catch (e) { }
+
+	
+}
+
+function hotelSelectEvent(city,name,hid,cin,cout,totalguest,totalroom,webType)
+{ try {
+	dataLayer.push({
+  event: "select_item",
+  ecommerce: {
+   item_list_id: "Hotel",
+item_list_name: "Hotel",
+      items: [
+       {
+        item_id: hid,
+        item_name: name,
+        item_brand: "Hotel",
+        item_category: city,
+        item_category2: cin,
+        item_category3: cout,
+        item_category4: totalguest,
+        item_category5: totalroom,
+item_list_id: "Hotel",
+item_list_name: "Hotel",
+        item_variant: webType,
+          }
+
+		 ]
+	}})
+}
+    catch (e) { }
+
+	
+}
+
+function hotelViewEvent(city,name,hid,cin,cout,totalguest,totalroom,webType,coupon,price,tax)
+{ try {
+	dataLayer.push({
+  event: "view_item",
+  ecommerce: {
+   
+      value: parseInt(price),
+      tax: parseInt(tax),
+      currency: "INR",
+      coupon: coupon,
+      items: [
+       {
+        item_id: hid,
+        item_name: name,
+        coupon: coupon,
+        item_brand: "Hotel",
+        item_category: city,
+        item_category2: cin,
+        item_category3: cout,
+        item_category4: totalguest,
+        item_category5: totalroom,
+item_list_id: "Hotel",
+item_list_name: "Hotel",
+        item_variant: webType,
+        price: parseInt(price) + parseInt(tax),
+        quantity: 1,
+      }
+]
+	}})
+}
+    catch (e) { }
+
+	
+}
+
+function AddToCart(city,name,hid,cin,cout,totalguest,totalroom,webType,coupon,price,tax)
+{
+	try
+	{
+		dataLayer.push({
+  event: "add_to_cart",
+  ecommerce: {
+   
+     value: parseInt(price),
+      tax: parseInt(tax),
+      currency: "INR",
+      coupon: coupon,
+      items: [
+       {
+        item_id: hid,
+        item_name: name,
+        coupon: coupon,
+        item_brand: "Hotel",
+        item_category: city,
+        item_category2: cin,
+        item_category3: cout,
+        item_category4: totalguest,
+        item_category5: totalroom,
+item_list_id: "Hotel",
+item_list_name: "Hotel",
+        item_variant: webType,
+       price: parseInt(price) + parseInt(tax),
+        quantity: 1,
+      }
+
+	]
+	}})
+}
+	catch(e)
+	{}
+	
+}
+
+function begin_checkout(city,name,hid,cin,cout,totalguest,totalroom,webType,coupon,price,tax)
+{
+	try
+	{
+		dataLayer.push({
+  event: "begin_checkout",
+  ecommerce: {
+   
+      value: parseInt(price),
+      tax: parseInt(tax),
+      currency: "INR",
+      coupon: coupon,
+      items: [
+       {
+        item_id: hid,
+        item_name: name,
+        coupon: coupon,
+        item_brand: "Hotel",
+        item_category: city,
+        item_category2: cin,
+        item_category3: cout,
+        item_category4: totalguest,
+        item_category5: totalroom,
+item_list_id: "Hotel",
+item_list_name: "Hotel",
+        item_variant: webType,
+        price: parseInt(price) + parseInt(tax),
+        quantity: 1,
+      }
+]
+	}})
+}
+	catch(e)
+	{}
+	
+}

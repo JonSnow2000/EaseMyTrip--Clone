@@ -1,0 +1,586 @@
+.img_colm {width: 105px;height: 105px;margin-left: 12px;position: relative;}
+.htl_offer {height: auto!important;padding: 10px 15px;}
+.htl_offer:before {content: '';background-image: url(https://www.easemytrip.com/hotels/content/img/homes/hotels-bg-ico.png);position: absolute;top: 5px;height: 100%;left: -15px;width: 100%;    background-repeat: no-repeat;}
+.htl_offer .offr_val {font-size: 11px;color: #ffffff;text-align: left;margin-right: auto;border: 1px dashed #fff;padding: 2px 6px;border-radius: 3px;}
+.htl_offer .ofrsec h4 {font-size: 15px;font-weight: 700;color: #fff;margin-bottom: 5px;}
+.htl_offer .ofrsec p {font-size: 12px;font-weight: 400;color: #fff;}
+
+
+.hotel-chain-bg {
+    background: url(https://www.easemytrip.com/hotels/content/img/homes/hotel-chain-bg.png);
+    width: 100%;
+    padding: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    margin: 50px 0;
+}
+.mid_c_wrap {
+    background-color: #ffffff;
+    font-weight: bold;
+    position: relative;
+    z-index: 99;
+    width: 1170px;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 7px rgb(0 0 0 / 20%);
+}
+.chn_htl_img {
+    width: 30%;
+    display: flex;
+}
+.chn_htl_rgt {
+    width: 70%;
+    background: #fff;
+    margin-left: auto;
+    padding: 40px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.chain_hed {
+    font-size: 25px;
+    font-weight: 600;
+    width: 100%;
+}
+.chain_sbh {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    margin: 20px auto;
+    text-align: justify;
+}
+.hotl_ch{margin-top: 20px;}
+.slick-slide{margin: auto;}
+
+
+.spcwjsb {margin: 65px auto 20px auto;justify-content: space-between}
+.city_bxn {width: 24%;}
+.goa_bx {background-image: url(https://www.easemytrip.com/hotels/content/img/homes/goa-img.png);}
+.mumb_bx {background-image: url(https://www.easemytrip.com/hotels/content/img/homes/mumbai-img.png);}
+.singp_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/singapore-img.png);}
+.bngk_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/bangkok-img.png);}
+.dubai_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/dubai-img.png);}
+.kolk_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/kolkata-img.png);}
+.bnaglr_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/bangalore-img.png);}
+.del_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/delhi-img.png);}
+.antalya_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/antalya-img.png);}
+.london_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/london-img.png);}
+.dubai_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/dubai-img.png);}
+.abu-dhabi_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/abu-dubai-img.png);}
+.khaimah_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/khaimah-img.png);}
+.phuket_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/phuket-img.png);}
+.pattaya_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/pattaya-img.png);}
+.bangkok_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/bangkok-img.png);}
+.lumpur_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/lumpur-img.png);}
+.langkawi_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/langkawi-img.png);}
+.samui_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/samui-img.png);}
+.hua-hin_bx{background-image: url(https://www.easemytrip.com/hotels/content/img/homes/hua-hin-img.png);}
+
+.grid-row-box {
+    display: flex;
+    /* grid-template:
+        "abc bcd def"
+        "fgh bcd hij"
+        "jkl lmn opq"
+        "jkl lmn opq"; */
+    flex-flow: wrap;
+    justify-content: space-between;
+    grid-template-columns: 38% 30% 30%;
+}
+.item1 { grid-area: abc; }
+.item2 { grid-area: bcd; }
+.item3 { grid-area: def; }
+.item4 { grid-area: fgh; }
+.item5 { grid-area: hij; }
+
+.item6 { grid-area: jkl; }
+.item7 { grid-area: lmn; }
+.item8 { grid-area: opq; }
+.item9 { grid-area: rst; }
+.item10 { grid-area: igb; }
+
+.item11 { grid-area: qwt; }
+.item12 { grid-area: yuf; }
+
+
+.grid-row-box-1 {
+    display: grid;
+    grid-template:
+        "abc bcd def"
+        "fgh bcd hij";
+    grid-gap: 12px;
+    grid-template-columns: 38% 30% 30%;
+}
+.grid-row-box-2 {
+    display: grid;
+    grid-template:
+        "jkl qwt lmn opq"
+        "jkl rst yuf igb";
+    grid-gap: 12px;
+    grid-template-columns:22% 22% 23% 30%;
+}
+.box-hotel-40 {
+    width: 24%;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    background-size: cover;
+    height: 220px;
+    padding: 15px;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
+    /* background-position: center; */
+    position: relative;
+    margin-bottom: 15px;
+    background-color: #e2e2e2;
+}
+
+.box-hotel-80 {
+    width: 24%;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    background-size: cover;
+    padding: 15px;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+    background-position: center;
+    margin-bottom: 15px;
+    position: relative;
+    background-color: #e2e2e2;
+}
+.hotel-seo_ovrly {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    border-radius: inherit;
+    background-image: linear-gradient(to bottom, #2f80ed00, #000000a3);
+}
+.price-seo-ht {
+    z-index: 1;
+    position: relative;
+    color: #000;
+    background: #FFAC00;
+    border-radius: 5px;
+    display: flex;
+    margin-left: auto;
+    font-size: 15px;
+    box-shadow: 0 0 8px rgb(0 0 0 / 14%);
+    padding: 6px 15px;
+}
+.city-seo-nm {
+    z-index: 1;
+    position: relative;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+/*scan*/
+.scan-pop {
+    position: fixed;
+    bottom: 0;
+    left: 15px;
+    width: 14%;
+    padding: 10px;
+    padding-top: 14px;
+    background: #dbeefd url(https://www.easemytrip.com/hotels/content/img/scan-bg-hotel-img.webp);
+    background-size: 100%;
+    display: flex;
+    box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+    flex-direction: column;
+    align-items: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    z-index: 99;
+    border-radius: 3px 0 0 0;
+}
+.cross_scn_pp {
+    background: #000;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    cursor: pointer;
+    font-size: 17px;
+    align-items: center;
+    border-radius: 50px;
+    justify-content: center;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+}
+.sctn_txt {
+    font-size: 11px;
+    background: #fff;
+    padding: 4px 3px;
+    width: 100%;
+    font-weight: 600;
+    border-radius: 5px;
+}
+.scan-bar {
+    width: 155px;
+    margin-bottom: -30px;
+}
+.sctn_txt span {
+    color: #2196F3;
+}
+/*scan end*/
+
+
+.ovr_hidd{box-shadow: 0 0 10px rgb(0 0 0 / 30%);border: 1px solid #bbbaba;}
+.loc_bx {
+    width: 260px;
+    margin: 15px auto;
+    height: 260px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-color: #e2e2e2;
+}
+.ovr_hidd{
+	width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+.loc_ovrly {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding: 22px;
+    color: #fff;
+    background: #00000033;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+.c_nm_ttx {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+}
+.loc_ovrly{}
+.pps_cc {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #2196F3;
+    height: 110px;
+    color: #fff;
+    text-align: center;
+    width: 110px;
+    padding: 26px 0px;
+    font-size: 13px;
+    border-radius: 50%;
+    border: 10px solid #fff;
+}
+.pps_cc strong{ font-size: 18px;}
+
+
+
+/*.hotel-d-bg {
+    background: #eee url(https://www.easemytrip.com/hotels/content/img/homes/hotel-d-bg.png);
+    width: 100%;
+    padding: 35px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    margin: 80px 0;
+    height: 350px;
+}
+*/
+.hotel-d-bg {
+    background: url(https://www.easemytrip.com/hotels/content/img/homes/bannner-hotel-newht.webp);
+    color: #fff;
+    padding: 25px;
+    background-size: cover;
+    height: 330px;
+    border-radius: 10px;
+    margin: 30px auto;
+}
+.mid_hp_wrap {
+    width: 1200px;
+    margin: 0px auto 26px auto;
+    padding: 0 15px;
+    position: relative;
+}
+/*.para_txt {
+    background: linear-gradient(to right, #2F80ED, #56CCF2);
+    padding: 34px;
+    color: #fff;
+    border-radius: 8px;
+    width: 40%;
+    position: absolute;
+    right: 0;
+    margin-left: auto;
+    top: -62px;
+}*/
+.para_txt {
+    /* background: linear-gradient(to right, #2F80ED, #56CCF2); */
+    padding: 32px 0;
+    color: #fff;
+    border-radius: 8px;
+    width: 65%;
+    /* position: absolute; */
+    right: 0;
+    /* margin-left: auto; */
+    /* top: -62px; */
+}
+.nwsec {
+    margin:35px 0 0 0
+}
+.mgauto{margin: auto;}
+.para_txt h4{    font-size: 22px; margin-bottom: 20px;}
+.para_txt p {
+    font-size: 14px;
+    text-align: left;
+    margin-top: 15px;
+}
+.innerWrapnv2 {
+    width: 1170px;
+    margin: 35px auto 0 auto;
+    padding: 0 15px;
+}
+/*
+.excdeals:after {
+    content: "";
+    display: block;
+    width: 40px;
+    background-color: #3F9AE0;
+    height: 2px;
+    margin-top: 8px;
+}
+*/
+.whybk {
+    flex-direction: column;
+    padding: 15px;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #cce9ff;
+    /* justify-content: space-between; */
+    border-radius: 16px;
+    background: #fff;
+    position: relative;
+    box-shadow: 0px 0px 3px rgb(0 0 0 / 15%);
+}
+.whybk_img {
+    width: 80px;
+    height: 80px;
+    margin-top: -56px;
+    background: #F1F9FF;
+    /* border: 1px solid #eee; */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+	margin-bottom:12px
+}
+.whybk .h_txt {
+    font-size: 19px;
+    color: #000;
+    margin: 3px auto;
+	font-weight:600;
+}
+.whybk .p_txt {
+    font-size: 14px;
+    margin: 5px 0;
+}
+/*Narendra*/
+.htlptnr_box {
+    margin:0px 0 25px;
+}
+.hotelchnbg {
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 7px rgb(0 0 0 / 20%);
+    border-radius: 5px;
+    padding: 15px;
+    margin:0 auto;
+}
+.pg_tle {
+    width: 100%;
+    text-align: center;
+}
+.wt600 {
+    font-weight: 600;
+}
+.f28 {
+    font-size: 28px;
+}
+.hotelchnbg p {
+    font-size: 15px;
+    margin: 10px 0 20px;
+}
+.sale-flx2 {
+    align-items: center;
+    margin: 15px 0px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.bx1 {
+    margin: 0 12px 0 0;
+    background: #f9f9f9;
+    border: 1px solid #dcdcdc;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1%;
+    justify-content: space-evenly;
+    align-items: center;
+    height: auto;
+    padding: 2px 7px;
+    border-radius: 4px;
+}
+.bx1 img {
+    margin-top:5px; border-radius: 5px;
+}
+
+/*silder*/
+
+.item-new {
+    background: #fff;
+    box-shadow: -1px 2px 4.5px 0px #cdcdcd;
+    width: 97%;
+    border-radius: 10px;
+    padding: 10px 10px 5px;
+    border: 1px solid #bcbcbc;
+    overflow: hidden;
+}
+.item-new:hover {
+    box-shadow: 0px 0px 3px 0px #2196f3;
+}
+.hl_tle_vm a { width: 12%; color: #2196f3; margin-left: auto; }
+.pg_tle2 { width: 45%; }
+.wt600 { font-weight: 600; }
+.md_sale { width: 1150px; margin: 0 auto; }
+.ech_bx { width: 100%; position: relative; height: 344px; }
+.ker_bg { background: url(kerala.png) no-repeat; background-size: cover; }
+.dys_ngt { width: 175px; background: #000; color: #fff; text-align: center; padding: 5px; border-radius: 100px; margin: 20px 20px 10px; float: left; }
+.f15 { font-size: 15px; }
+.pck_dt_bx { width: 337px; background: #fff; position: absolute; padding: 15px; /* border-radius: 10px; */
+bottom: 17px; left: 50%; /* border: 1px solid #E4F3FF; */
+    /* box-shadow: 0px 0px 5px rgb(0 0 0 / 20%); */
+align-items: center; transform: translate(-50%); }
+.jsb { justify-content: space-between; }
+.flx { display: flex; }
+.dest_prce { width: 60%; color: #000; }
+.clm { flex-direction: column; }
+.wt700 { font-weight: 700; }
+.f24 { font-size: 24px; }
+.sb_txt { display: block; margin: 5px 0px; }
+.sb_txt { display: block; margin: 5px 0px; }
+.f12 { font-size: 12px; }
+.mn_rpee { width: 100%; color: #00A2FF; font-size: 32px; font-weight: 700; }
+.sb_txt { display: block; margin: 5px 0px; }
+.sb_txt { display: block; margin: 5px 0px; }
+.f12 { font-size: 12px; }
+.mg_vwdt { width: 37%; }
+.hol_mg { width: 100%; text-align: right; }
+.txt_oarw { width: 100%; color: #EF6614; font-weight: 600; cursor: pointer; padding: 5px 0px; border-radius: 5px; margin-top: 4px; justify-content: space-between; }
+.txt_oarw img { margin-left: 0px; margin-top: 1px; display: inline-block !important; width: 20px !important; }
+.pck_sldr { width: 100%; margin: 40px 0px 0px; }
+.owl-carousel .owl-stage-outer { position: relative; overflow: hidden; -webkit-transform: translate3d(0, 0, 0); }
+.htimght { height:100px; width: 100%; }
+.htimght img {
+    width: 100%;
+    height: 100px;
+    border-radius: 6px;
+}
+.testht {
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+    padding: 5px 0 0;
+}
+.hedtf { text-align: center; font-size: 18px; font-weight: 600; }
+.htyu { font-size: 12px; text-align: center; padding: 4px 0; font-weight: 500; }
+.item-new a { text-decoration: none; }
+
+
+/*Narendra*/
+
+.accordion__item{margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;}.accordion__item__header{padding:7px 0;cursor:pointer;position:relative;color:#000;font-weight:500;font-size:19px}.accordion__item__header::before{height:12px;width:12px;content:"";position:absolute;right:15px;top:15px;transition:.5s all;transform:rotate(45deg);border-right:2px solid #000;border-bottom:2px solid #000;}.accordion__item__header.active{transition:.4s}.accordion__item__header.active::before{transform:rotate(-135deg);top:23px}.accordion__item__content{overflow-y:hidden;padding:0;display:none;margin-bottom: 10px;font-size:14px;}
+	
+.modal_app { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.75); }
+.modal_appbx {
+    background-color: #fff;
+    margin: auto;
+    padding: 0;
+    width: 446px;
+    border-radius: 20px;
+    height: 345px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.modal_cont_app {padding:0;width:100%;overflow: hidden;height: 100%;}
+.close_app { position: absolute;
+    right: -20px;
+    top: -20px;cursor:pointer}
+.close_app:hove { color: #000; text-decoration: none; cursor: pointer; }
+.htl-img-bg {width:100%;height:245px;background:url(https://www.easemytrip.com/images/hotel-img/hotel-app-bg.png) no-repeat;border-radius: 20px 20px 0 0;}
+.appflx {display:flex}
+.appimgsc img {max-width:unset}
+.ftn40 {font-size:40px;font-weight:600;color:#fff}
+.ftn26 {font-size:24px;font-weight:600;color:#fff}
+.ftn14 {font-size:16px;font-weight:500;color:#fff}
+.ftn16 {font-size:16px;font-weight:600;color:#2196f3}
+.appimgsc{margin: 87px 20px 0 45px;}
+.tpscr10 {margin-top:17px}
+.rtscr20 {margin-right:20px}
+.mgtp7 {margin-top:7px}
+.cpcodes {
+    background: #D9EEFF;
+    border-radius: 5px;
+    padding: 7px;
+    margin-top: 28px;
+	text-align:center
+}
+.ftn13 {font-size:12px;font-weight:600;color:#000}
+
+.ctmrg{margin:25px 0 0 !important;}
+.slchtl_mn{width:100%;}
+._polrdestnbx{display:flex;flex-wrap: wrap;gap: 23px;}
+.ecpl_rbx{width: 32%;background:#F6FBFF;border:1px solid #2196F3;border-radius:10px;padding:5px;display:flex;justify-content:space-between;}
+.ecpl_rbx:nth-child(3), .ecpl_rbx:nth-child(6){margin-right:0}
+.mgdestn{width: 20%;height: 70px;}
+.mgdestn img{width: 100%;height: 100%;object-fit: cover;border-radius:10px;}
+._pckgdscrptn{width: 76%;display:flex;flex-flow:column;}
+._pckgdscrptn h5{font-size:18px;font-weight:700;margin:0;}
+.htlnking{font-size:13px;}
+.htlnking a{color:#000;text-decoration:none;position: relative;}
+.htlnking a:before{
+    content: "";
+    position:absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0px;
+    background: #2196f3;
+    visibility:hidden;
+    border-radius:5px;
+    transition:.25s linear;
+    transform: scaleX(0);
+    }
+.htlnking a:hover:before{visibility:visible;transform:scaleX(1);}
+.moretext{display:none;width:100%;}
+.mt20{margin-top:20px;}

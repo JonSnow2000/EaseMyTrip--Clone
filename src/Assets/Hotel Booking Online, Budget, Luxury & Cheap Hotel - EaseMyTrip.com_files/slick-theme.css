@@ -1,0 +1,109 @@
+@charset 'UTF-8';
+/* Slider */
+.slick-loading .slick-list
+{
+    background: #fff url(https://www.easemytrip.com/img/ajax-loader.gif) center center no-repeat;
+}
+
+
+/* Arrows */
+.slick-prev
+{
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 33px;
+    display: block;
+    padding: 0;
+    cursor: pointer;
+    color: transparent;
+    outline: none;
+    display: table-cell;
+    vertical-align: middle;
+    background: url(https://www.easemytrip.com/images/hotel-img/left-slider-arrow.png) no-repeat;
+    cursor: pointer;
+    width: 45px;
+	border:0;
+	 height: 45px;
+}
+.slick-next
+{
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 33px;
+    display: block;
+    padding: 0;
+    cursor: pointer;
+    color: transparent;
+    outline: none;
+    display: table-cell;
+    vertical-align: middle;
+    background: url(https://www.easemytrip.com/images/hotel-img/right-slider-arrow.png) no-repeat;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+	border:0
+}
+
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before
+{
+    opacity: 1;
+}
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before
+{
+    opacity: .25;
+}
+
+.slick-prev:before,
+.slick-next:before
+{
+    line-height: 1;
+
+    opacity: .75;
+    color: white;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-prev
+{
+    left:-36px;
+}
+[dir='rtl'] .slick-prev
+{
+    right: -33px;
+    left: auto;
+}
+.slick-prev:before
+{
+    content: '';
+}
+[dir='rtl'] .slick-prev:before
+{
+    content: '';
+}
+
+.slick-next
+{
+    right: -36px;
+}
+[dir='rtl'] .slick-next
+{
+    right: auto;
+    left: -25px;
+}
+.slick-next:before
+{
+    content: '';
+}
+[dir='rtl'] .slick-next:before
+{
+    content: '';
+}
+

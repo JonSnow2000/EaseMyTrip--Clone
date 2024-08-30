@@ -1,0 +1,30 @@
+@media(max-width:768px){
+    .flight-booking-main-container{
+        width: 96vw;
+        margin: 0;
+    }
+    .flight-details{
+        margin: 5px;
+    }
+    .flight-logo-div{
+        flex-direction: column;
+    }
+    .flight-logo-div div{
+        width: inherit;
+    }
+    .flght-booking-section{
+        flex-direction: column;
+    }
+    .booking-details, .fare{
+        width: 96vw;
+    }
+    .contact{
+        width: 96vw;
+    }
+    .contact>div{
+        flex-direction: column;
+    }
+    .contact button{
+        margin: 0;
+    }
+}

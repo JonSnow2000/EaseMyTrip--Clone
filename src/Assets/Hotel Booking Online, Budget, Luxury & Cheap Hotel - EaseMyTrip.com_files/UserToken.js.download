@@ -1,0 +1,100 @@
+﻿function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+var UTOKEN = getCookie("EVisiterID");
+var BrowserObj = {};
+var ServiceURL="https://flightservice-web.easemytrip.com";
+var countryCode = "IN";
+var vid="";
+if (window.location.hostname.indexOf(".th") > 0) {
+    countryCode = "TH";
+	ServiceURL="https://flightservice.easemytrip.co.th";
+}
+else if (window.location.hostname.indexOf(".ae") > 0) {
+    countryCode = "ae";
+	ServiceURL="https://flightservice.easemytrip.ae";
+}
+else if (window.location.hostname.indexOf(".com") > 0) {
+    countryCode = "IN";
+	ServiceURL="https://flightservice-web.easemytrip.com";
+}
+else if (window.location.hostname.indexOf(".uk") > 0) {
+    countryCode = "UK";
+	ServiceURL="https://flightservice.easemytrip.co.uk";
+}
+//Notification.permission
+var Token = {};
+Token.domain = countryCode;
+Token.email = getCookie("login_email");
+Token.mobile = getCookie("login_ph");
+if (Notification != null) {
+    Token.is_push_notification = true;
+    if (Notification.permission.toUpperCase() == "DENIED") {
+        Token.is_push_notification = false;
+    }
+}
+
+Token.browser = browser;
+Token.browserid = browser.fingerprint;
+if(UTOKEN=="null" || UTOKEN=="undefined"){
+	UTOKEN="";
+}
+Token.token = UTOKEN;//(getCookie("VisiterID")=="undefined"?'':getCookie("VisiterID"));
+Token.loginkey = getCookie("XFFGHTYUOP@#$NL");
+
+if (UTOKEN == "" || UTOKEN=="undefined" || Token.loginkey!="") {
+	
+    GetUserToken();
+}
+function GetUserToken() {
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: { "useridentity": "thq+4jzBJfzUwXeQhs8815pM215Y1bdP" },
+        url: ServiceURL+"/EmtAppService/AppInitialize/UGenrateToken",
+        data: JSON.stringify(Token),
+		async:true,
+        success: function (response) {
+			if(response!=null){
+			 createCookieToken("EVisiterID", response);	
+			 vid=response;
+			}
+            
+        },
+        beforeSend: function (XMLHttpRequest) { },
+        error: function (xmlHttpRequest, status, err) {
+            //alert(err);
+
+        }
+    });
+}
+
+function createCookieToken(name, value, days) {
+    var domain = "";
+    for (var i = 1; i < document.domain.split('.').length; i++) {
+        if (domain!="") {
+            domain += ".";
+        }
+        domain += document.domain.split('.')[i];
+    }
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name + "=" + value + ";domain="+domain+";path=/";
+}

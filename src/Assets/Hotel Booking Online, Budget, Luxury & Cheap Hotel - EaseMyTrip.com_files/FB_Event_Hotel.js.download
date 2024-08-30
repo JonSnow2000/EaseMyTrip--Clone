@@ -1,0 +1,112 @@
+﻿function ViewFBListing(checkin, checkout, listId, city, country, num_adlts, num_child) {
+    LoadFBPiixel();
+    try {
+        fbq('track', 'Search', {
+            content_type: 'hotel',
+            checkin_date: checkin,
+            checkout_date: checkout,
+            content_ids: '' + listId + '',
+            city: city,
+          
+            country: country,
+            num_adults: parseInt(num_adlts),
+            num_children: parseInt(num_child)
+        });
+    }
+    catch (e) {
+    }
+}
+
+function ViewFBDetails(checkin, checkout, htlid, city, country, num_adlts, num_child) {
+    LoadFBPiixel();
+    try {
+        fbq('track', 'ViewContent', {
+            content_type: 'hotel',
+            checkin_date: checkin,
+            checkout_date: checkout,
+            content_ids: '' + htlid + '',
+            city: city,
+           
+            country: country,
+            num_adults: parseInt(num_adlts),
+            num_children: parseInt(num_child)
+        });
+    }
+    catch (e) {
+    }
+}
+
+function ViewFBCheckOut(checkin, checkout, htlid, city, country, num_adlts, num_child, totalFare, Curr) {
+    LoadFBPiixel();
+
+    try {
+        fbq('track', 'InitiateCheckout', {
+            content_type: 'hotel',
+            checkin_date: checkin,
+            checkout_date: checkout,
+            content_ids: '' + htlid + '',
+            city: city,
+           
+            country: country,
+            currency: '' + Curr + '',
+            value: parseInt(totalFare),
+            num_adults: parseInt(num_adlts),
+            num_children: parseInt(num_child)
+        });
+
+    }
+    catch (e) {
+    }
+}
+
+
+function ViewFBChConfirmChekOut(checkin, checkout, htlid, city, country, num_adlts, num_child,totalFare,Curr) {
+    LoadFBPiixel();
+    try {
+        fbq('track', 'Purchase', {
+            content_type: 'hotel',
+            checkin_date: checkin,
+            checkout_date: checkout,
+            content_ids: '' + htlid + '',
+            city: city,
+           
+            country: country,
+            currency: '' + Curr + '',
+            value: parseInt(totalFare),
+            num_adults: parseInt(num_adlts),
+            num_children: parseInt(num_child)
+        });
+
+
+    }
+    catch (e) {
+    }
+}
+
+function ViewFBInit() {
+    LoadFBPiixel();
+    try {
+        fbq('init', '1815045845290288');
+        fbq('track', 'PageView');
+    }
+    catch (e) {
+    }
+}
+
+function LoadFBPiixel() {
+    try {
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+    } catch (e) {
+    }
+
+}

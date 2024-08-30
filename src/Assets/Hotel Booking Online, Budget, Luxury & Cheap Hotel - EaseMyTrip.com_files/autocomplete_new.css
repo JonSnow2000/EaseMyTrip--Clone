@@ -1,0 +1,114 @@
+﻿
+.aircomplete-list:after, .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.aircomplete {
+}
+.aircomplete-list {
+    position: relative;
+    top: 100%;
+    margin: 3px 0 0;
+    padding: 0;
+    list-style: none;
+    max-height: 400px;
+    overflow: auto;
+    background: #fff;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+    z-index:2;
+	font-family: 'Open Sans', sans-serif, Tahoma, Arial
+}
+.aircomplete-list-item {
+    padding:8px 10px;
+    border-bottom: solid 1px #ddd;
+    cursor:pointer;
+	position:relative
+}
+.aircomplete-list-item img {
+    filter: grayscale(100%);
+    opacity: .4;
+}
+.aircomplete-selected {
+    background-color: white;
+    background-color: #f1f1f1;
+    color: #666;
+}
+.aircomplete-focused, .aircomplete-list-item:hover {
+    background-color: #f1f1f1;
+    color: #666;
+}
+.aircomplete-focused small, .aircomplete-selected small, .aircomplete-list-item:hover small {
+    color: #999;
+}
+.aircomplete-focused img, .aircomplete-selected img, .aircomplete-list-item:hover img {
+    filter: grayscale(0%);
+    opacity: .6;
+}
+.aircomplete small {
+    font-size: 12px;
+    color: #bbb;
+}
+.t_icn {float:left;margin-right:5px}
+
+.ssg-suggestion__info {
+    display: table-cell;
+    vertical-align: middle;
+	padding-left:7px
+}
+.ssg-title {
+    display: block;
+    height: 20px;
+    font-size: 15px;
+    line-height: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333333;
+	font-weight:400
+}
+.ssg-subtitle {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+    color: #737373;
+}
+.no-of-hotel {position:absolute;right:10px;top:14px;font-size: 11px;color: #b6b6b6;}
+.ssg-icon {
+    height: 24px;
+    width: 35px;
+    text-align: center;
+    background-position: 50%;
+	display: table-cell;
+    vertical-align: middle;
+}
+.loctation_at_icn {background-image:url(../../img/location-icon.svg);background-repeat: no-repeat;
+background-position: center center;
+width: 30px;
+height: 30px;
+display: inline-block;}
+.flight_at_icn {background-image:url(../../img/flight-icon.svg);background-repeat: no-repeat;
+background-position: center center;
+width: 30px;
+height: 30px;
+display: inline-block;}
+.city_at_icn {background-image:url(../../img/city-icon.svg);background-repeat: no-repeat;
+background-position: center center;
+width: 25px;
+height: 25px;
+display: inline-block;}
+.hotel_at_icn {background-image:url(../../img/hotel-icon.svg);background-repeat: no-repeat;
+background-position: center center;
+width: 25px;
+height: 25px;
+display: inline-block;}
+

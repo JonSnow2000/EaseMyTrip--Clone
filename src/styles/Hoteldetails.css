@@ -1,0 +1,44 @@
+@media(max-width:768px){
+    .hotel-list{
+        width: 100vw;
+        overflow-x: scroll;
+    }
+    .htldetails{
+        width: 65vw;
+    }
+    .h-list{
+        width: 200vw;
+    }
+    .view{
+        width: auto;
+        padding-left: 50px;
+    }
+    .viewMore{
+        /* width: 100vw; */
+        overflow-x: scroll;
+    }
+    .htlimg{
+        width: 90vw;
+    }
+    .img-div,.amanities,.htlData{
+        margin: 10px;
+        width: 190vw;
+    }
+    .htlinfo{
+        width: 100vw;
+        margin-left: 8px;
+    }
+    .auto{
+        width: auto;
+    }
+    .booknow{
+        width: 30vw;
+        text-wrap: nowrap;
+        margin: 10px;
+        padding-right: 0;
+    }
+    .roomtype{
+        width: 52vw;
+    }
+    
+}
